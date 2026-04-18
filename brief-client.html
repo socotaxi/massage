@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brief Client — Création de site web · Massage à domicile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="brief-client.css" />
+</head>
+<body>
+
+  <!-- ===== BARRE D'ACTIONS ===== -->
+  <div class="action-bar no-print">
+    <div class="action-bar__inner">
+      <div class="action-bar__right">
+
+        <button class="btn-action btn-action--ghost" onclick="window.print()">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 7V3h10v4M5 14H3a1 1 0 01-1-1V8a1 1 0 011-1h14a1 1 0 011 1v5a1 1 0 01-1 1h-2M5 11h10v6H5v-6z"/></svg>
+          Imprimer / Exporter PDF
+        </button>
+
+        <!-- Bouton Partager + dropdown -->
+        <div class="share-wrap">
+          <button class="btn-action btn-action--primary" id="btnShare">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="15" cy="4" r="2"/><circle cx="15" cy="16" r="2"/><circle cx="5" cy="10" r="2"/><path d="M7 9l6-4M7 11l6 4"/></svg>
+            Partager
+          </button>
+          <div class="share-dropdown" id="shareDropdown" hidden>
+            <a class="share-item" id="shareWhatsApp" href="#">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.558 4.142 1.543 5.893L.057 23.5l5.752-1.508A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.638-.51-5.145-1.395l-.369-.22-3.812 1-.978-3.716-.24-.383A9.961 9.961 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+              WhatsApp
+            </a>
+            <a class="share-item" id="shareEmail" href="#">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4h16v12H2zM2 4l8 7 8-7"/></svg>
+              Email
+            </a>
+            <a class="share-item" id="shareSMS" href="#">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h16a1 1 0 011 1v9a1 1 0 01-1 1H6l-4 3V4a1 1 0 011-1z"/></svg>
+              SMS
+            </a>
+            <button class="share-item" id="shareCopy">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M3 13V3h10"/></svg>
+              Copier le brief
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DOCUMENT ===== -->
+  <main class="document">
+
+    <!-- EN-TÊTE DU DOCUMENT -->
+    <header class="doc-header">
+      <div class="doc-header__center">
+        <h1 class="doc-title">Brief client</h1>
+        <p class="doc-subtitle">Création de site web — Service de massage à domicile</p>
+      </div>
+      <div class="doc-header__right">
+        <div class="doc-meta">
+          <span>Date</span>
+          <input type="date" class="meta-input" id="metaDate" />
+        </div>
+      </div>
+    </header>
+
+    <!-- MOT D'INTRODUCTION -->
+    <div class="intro-box">
+      <p><strong>Bonjour Louz,</strong></p>
+      <p>Pour créer le site comme tu l'imagines et qui convertit vraiment les visiteurs en clients, j'ai besoin de rassembler quelques informations avec toi. Ce document est structuré par priorité : les rubriques marquées <strong>Prioritaire</strong> sont indispensables pour démarrer. Le reste peut être complété dans un second temps.</p>
+    </div>
+
+    <!-- ================================================
+         SECTION 1 — IDENTITÉ ET MARQUE
+         ================================================ -->
+    <section class="brief-section">
+      <div class="section-header section-header--teal">
+        <div class="section-header__num">1</div>
+        <h2>Identité et marque</h2>
+        <span class="badge badge--priority">Prioritaire</span>
+      </div>
+      <p class="section-intro">Ces éléments donnent le ton du site. Ils définissent comment les visiteurs vont percevoir ton univers en 3 secondes.</p>
+
+      <table class="brief-table">
+        <thead>
+          <tr><th>Information demandée</th><th>La réponse</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Nom du service ou de la marque</strong>
+            </td>
+            <td><textarea name="marque_nom" placeholder="À compléter..." rows="2"></textarea></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Nom de la masseuse</strong>
+            </td>
+            <td><textarea name="therapeute_nom" placeholder="À compléter..." rows="2"></textarea></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Slogan (si souhaité)</strong>
+              <span class="hint">Une phrase courte qui résume votre promesse</span>
+            </td>
+            <td><textarea name="slogan" placeholder="À compléter..." rows="2"></textarea></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Couleurs préférées</strong>
+            </td>
+            <td>
+              <div class="color-row">
+                <div class="color-pick">
+                  <label>Couleur principale</label>
+                  <div class="color-input-wrap">
+                    <input type="color" name="color_1" value="#7A9E7E" />
+                    <input type="text" name="color_1_hex" placeholder="#7A9E7E" maxlength="7" />
+                  </div>
+                </div>
+                <div class="color-pick">
+                  <label>Couleur secondaire</label>
+                  <div class="color-input-wrap">
+                    <input type="color" name="color_2" value="#C9A96E" />
+                    <input type="text" name="color_2_hex" placeholder="#C9A96E" maxlength="7" />
+                  </div>
+                </div>
+              </div>
+              <textarea name="couleurs_notes" placeholder="Notes complémentaires sur les couleurs..." rows="2" style="margin-top:8px"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Ambiance visuelle souhaitée</strong>
+              <span class="hint">Épurée, naturelle, luxe, cocooning...</span>
+            </td>
+            <td>
+              <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" name="ambiance" value="epure" /> Épurée / Minimaliste</label>
+                <label class="checkbox-label"><input type="checkbox" name="ambiance" value="naturel" /> Naturelle / Organique</label>
+                <label class="checkbox-label"><input type="checkbox" name="ambiance" value="luxe" /> Luxe / Premium</label>
+                <label class="checkbox-label"><input type="checkbox" name="ambiance" value="cocooning" /> Cocooning / Chaleureux</label>
+                <label class="checkbox-label"><input type="checkbox" name="ambiance" value="medical" /> Professionnel / Médical</label>
+              </div>
+              <textarea name="ambiance_notes" placeholder="Autres précisions..." rows="2" style="margin-top:8px"></textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ================================================
+         SECTION 2 — MASSEUSES
+         ================================================ -->
+    <section class="brief-section">
+      <div class="section-header section-header--teal">
+        <div class="section-header__num">2</div>
+        <h2>La masseuse</h2>
+        <span class="badge badge--priority">Prioritaire</span>
+      </div>
+      <p class="section-intro">Le massage à domicile repose sur la confiance. Un visage et un parcours rassurent autant, voire plus, que des tarifs.</p>
+
+      <div class="subsection-title">À fournir pour chaque praticienne :</div>
+      <ul class="checklist">
+        <li><label class="checkbox-label"><input type="checkbox" /> Une photo professionnelle (fond neutre, tenue de travail, sourire naturel)</label></li>
+        <li><label class="checkbox-label"><input type="checkbox" /> Diplômes et certifications exacts (intitulé, école, année)</label></li>
+        <li><label class="checkbox-label"><input type="checkbox" /> Nombre d'années d'expérience</label></li>
+        <li><label class="checkbox-label"><input type="checkbox" /> Une bio courte de 2 à 3 phrases, ton chaleureux et sincère</label></li>
+        <li><label class="checkbox-label"><input type="checkbox" /> Tes spécialités ou sensibilités (sportif, femme enceinte, relaxation profonde...)</label></li>
+      </ul>
+
+      <table class="brief-table" style="margin-top:20px">
+        <thead>
+          <tr><th>Information demandée</th><th>La réponse</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Diplômes et certifications</strong><span class="hint">Intitulé exact, école, année</span></td>
+            <td><textarea name="diplomes" placeholder="À compléter..." rows="4"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>Années d'expérience</strong></td>
+            <td><textarea name="experience" placeholder="À compléter..." rows="2"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>Bio courte</strong><span class="hint">2 à 3 phrases, ton chaleureux</span></td>
+            <td><textarea name="bio" placeholder="À compléter..." rows="4"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>Spécialités / sensibilités</strong></td>
+            <td>
+              <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" /> Relaxation profonde</label>
+                <label class="checkbox-label"><input type="checkbox" /> Massage sportif</label>
+                <label class="checkbox-label"><input type="checkbox" /> Femme enceinte / prénatal</label>
+                <label class="checkbox-label"><input type="checkbox" /> Personnes âgées / seniors</label>
+                <label class="checkbox-label"><input type="checkbox" /> Enfants</label>
+                <label class="checkbox-label"><input type="checkbox" /> Entreprises / événementiel</label>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-note">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+        <p>Optes pour des photos professionnelles.</p>
+      </div>
+    </section>
+
+    <!-- ================================================
+         SECTION 3 — CATALOGUE DE MASSAGES
+         ================================================ -->
+    <section class="brief-section">
+      <div class="section-header section-header--teal">
+        <div class="section-header__num">3</div>
+        <h2>Catalogue de massages</h2>
+        <span class="badge badge--priority">Prioritaire</span>
+      </div>
+      <p class="section-intro">Pour chaque massage proposé, merci de remplir les informations suivantes. Duplique le bloc autant de fois que tu as de massages.</p>
+
+      <!-- Soin 1 -->
+      <div class="soin-block" id="soin-1">
+        <div class="soin-block__header">
+          <span class="soin-block__label">Soin n°1</span>
+        </div>
+        <table class="brief-table">
+          <thead><tr><th>Information demandée</th><th>Tes réponses</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Nom exact du massage</strong><span class="hint">Ex : Massage californien, suédois, prénatal...</span></td>
+              <td><textarea name="soin1_nom" placeholder="À compléter..." rows="2"></textarea></td>
+            </tr>
+            <tr>
+              <td><strong>Description courte</strong><span class="hint">2 à 3 phrases : pour qui, bénéfices, ressenti</span></td>
+              <td><textarea name="soin1_desc" placeholder="À compléter..." rows="3"></textarea></td>
+            </tr>
+            <tr>
+              <td><strong>Durées proposées</strong><span class="hint">Ex : 45 min, 60 min, 90 min</span></td>
+              <td><textarea name="soin1_durees" placeholder="À compléter..." rows="2"></textarea></td>
+            </tr>
+            <tr>
+              <td><strong>Prix par durée</strong><span class="hint">Précisez chaque tarif</span></td>
+              <td><textarea name="soin1_prix" placeholder="À compléter..." rows="2"></textarea></td>
+            </tr>
+            <tr>
+              <td><strong>Contre-indications</strong><span class="hint">Ex : prénatal à partir de quel mois ? Grossesse à risque ?</span></td>
+              <td><textarea name="soin1_ci" placeholder="À compléter..." rows="2"></textarea></td>
+            </tr>
+            <tr>
+              <td><strong>Matériel utilisé</strong><span class="hint">Huiles, pierres chaudes, bougies...</span></td>
+              <td><textarea name="soin1_materiel" placeholder="À compléter..." rows="2"></textarea></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Soin 2 -->
+      <div class="soin-block" id="soin-2">
+        <div class="soin-block__header">
+          <span class="soin-block__label">Soin n°2</span>
+        </div>
+        <table class="brief-table">
+          <thead><tr><th>Information demandée</th><th>Votre réponse</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Nom exact du massage</strong></td>
+              <td><textarea name="soin2_nom" placeholder="À compléter..." rows="2"></textarea></td>
+            </tr>
+            <tr>
+              <td><strong>Description courte</strong></td>
+              <td><textarea name="soin2_desc" placeholder="À compléter..." rows="3"></textarea></td>
+            </tr>
+            <tr>
+              <td><strong>Durées proposées</strong></td>
+              <td><textarea name="soin2_durees" placeholder="À compléter..." rows="2"></textarea></td>
+            </tr>
+            <tr>
+              <td><strong>Prix par durée</strong></td>
+              <td><textarea name="soin2_prix" placeholder="À compléter..." rows="2"></textarea></td>
+            </tr>
+            <tr>
+              <td><strong>Contre-indications</strong></td>
+              <td><textarea name="soin2_ci" placeholder="À compléter..." rows="2"></textarea></td>
+            </tr>
+            <tr>
+              <td><strong>Matériel utilisé</strong></td>
+              <td><textarea name="soin2_materiel" placeholder="À compléter..." rows="2"></textarea></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Bouton ajouter soin -->
+      <button type="button" class="btn-add-soin no-print" id="addSoin">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="8"/><path d="M10 6v8M6 10h8"/></svg>
+        Ajouter un soin supplémentaire
+      </button>
+
+      <div class="info-note">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+        <p>Conseil : évites les noms trop techniques si ta cible ne les connaît pas. « Massage anti-stress » parle souvent plus que « drainage lymphatique manuel ».</p>
+      </div>
+    </section>
+
+    <!-- ================================================
+         SECTION 4 — ZONE & DISPONIBILITÉS
+         ================================================ -->
+    <section class="brief-section">
+      <div class="section-header section-header--teal">
+        <div class="section-header__num">4</div>
+        <h2>Zone géographique et disponibilités</h2>
+        <span class="badge badge--priority">Prioritaire</span>
+      </div>
+
+      <table class="brief-table">
+        <thead><tr><th>Informations demandées</th><th>Les réponses</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Quartiers desservis</strong><span class="hint">Soyez précis : cela aide aussi votre référencement local</span></td>
+            <td><textarea name="zone_villes" placeholder="À compléter..." rows="3"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>Rayon kilométrique maximum</strong><span class="hint">Ex : 20 km autour de...</span></td>
+            <td><textarea name="zone_rayon" placeholder="À compléter..." rows="2"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>Frais de déplacement</strong><span class="hint">Gratuit dans la zone ? Majoration au-delà ?</span></td>
+            <td>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="frais_deplacement" value="gratuit" /> Gratuit dans toute la zone</label>
+                <label class="radio-label"><input type="radio" name="frais_deplacement" value="majoration" /> Majoration au-delà d'un certain rayon</label>
+                <label class="radio-label"><input type="radio" name="frais_deplacement" value="forfait" /> Forfait fixe par déplacement</label>
+              </div>
+              <textarea name="frais_details" placeholder="Précisez les montants..." rows="2" style="margin-top:8px"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Horaires d'intervention</strong><span class="hint">Ex : lundi–dimanche, 9h–21h</span></td>
+            <td><textarea name="horaires" placeholder="À compléter..." rows="2"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>Jours de fermeture</strong><span class="hint">Si applicable</span></td>
+            <td><textarea name="fermeture" placeholder="À compléter..." rows="2"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>Délai minimum de réservation</strong><span class="hint">Ex : 2h avant, la veille...</span></td>
+            <td>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="delai_resa" value="2h" /> 2 heures avant</label>
+                <label class="radio-label"><input type="radio" name="delai_resa" value="24h" /> 24 heures avant</label>
+                <label class="radio-label"><input type="radio" name="delai_resa" value="veille" /> La veille</label>
+                <label class="radio-label"><input type="radio" name="delai_resa" value="autre" /> Autre</label>
+              </div>
+              <textarea name="delai_details" placeholder="Précisez si autre..." rows="2" style="margin-top:8px"></textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ================================================
+         SECTION 5 — RÉSERVATION & PAIEMENT
+         ================================================ -->
+    <section class="brief-section">
+      <div class="section-header section-header--teal">
+        <div class="section-header__num">5</div>
+        <h2>Réservation et paiement</h2>
+        <span class="badge badge--priority">Prioritaire</span>
+      </div>
+      <p class="section-intro">C'est ici que se joue la conversion : un parcours de réservation compliqué fait fuir.</p>
+
+      <table class="brief-table">
+        <thead><tr><th>Information demandée</th><th>La réponse</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Système de réservation souhaité</strong><span class="hint">Formulaire simple ? Calendly ? Outil dédié type Planity ? Appel uniquement ?</span></td>
+            <td>
+              <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" name="resa_sys" value="formulaire" /> Formulaire simple sur le site</label>
+                <label class="checkbox-label"><input type="checkbox" name="resa_sys" value="calendly" /> Calendly (calendrier en ligne)</label>
+                <label class="checkbox-label"><input type="checkbox" name="resa_sys" value="planity" /> Planity ou outil dédié</label>
+                <label class="checkbox-label"><input type="checkbox" name="resa_sys" value="tel" /> Téléphone uniquement</label>
+                <label class="checkbox-label"><input type="checkbox" name="resa_sys" value="whatsapp" /> WhatsApp / SMS</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Modes de paiement acceptés</strong><span class="hint">CB, espèces, virement, PayPal, chèques vacances...</span></td>
+            <td>
+              <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" /> Espèces</label>
+                <label class="checkbox-label"><input type="checkbox" /> Virement bancaire</label>
+                <label class="checkbox-label"><input type="checkbox" /> Mobile money</label>
+                <label class="checkbox-label"><input type="checkbox" /> Chèque</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Prépaiement ou paiement sur place ?</strong><span class="hint">Acompte possible ?</span></td>
+            <td>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="prepaiement" value="sur_place" /> Paiement sur place uniquement</label>
+                <label class="radio-label"><input type="radio" name="prepaiement" value="en_ligne" /> Prépaiement en ligne</label>
+                <label class="radio-label"><input type="radio" name="prepaiement" value="acompte" /> Acompte + solde sur place</label>
+                <label class="radio-label"><input type="radio" name="prepaiement" value="au_choix" /> Laissé au choix du client</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Politique d'annulation</strong><span class="hint">Délai, frais éventuels</span></td>
+            <td><textarea name="annulation" placeholder="À compléter..." rows="3"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>Confirmation de réservation</strong><span class="hint">SMS, email, appel ?</span></td>
+            <td>
+              <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" /> Email automatique</label>
+                <label class="checkbox-label"><input type="checkbox" /> SMS automatique</label>
+                <label class="checkbox-label"><input type="checkbox" /> Appel téléphonique manuel</label>
+                <label class="checkbox-label"><input type="checkbox" /> WhatsApp</label>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ================================================
+         SECTION 6 — PHOTOS & MÉDIAS
+         ================================================ -->
+    <section class="brief-section">
+      <div class="section-header section-header--teal">
+        <div class="section-header__num">7</div>
+        <h2>Photos et médias</h2>
+      </div>
+      <p class="section-intro">Point capital pour la conversion. Sur un site de massage, les photos portent l'émotion avant même le texte.</p>
+
+      <div class="subsection-title">À fournir idéalement :</div>
+      <ul class="checklist">
+        <li><label class="checkbox-label"><input type="checkbox" /> Une photo « hero » : ambiance massage, mains, bougies, textures naturelles</label></li>
+        <li><label class="checkbox-label"><input type="checkbox" /> Une photo par type de massage proposé</label></li>
+        <li><label class="checkbox-label"><input type="checkbox" /> Photo(s) de ton matériel : table, huiles, serviettes</label></li>
+        <li><label class="checkbox-label"><input type="checkbox" /> Une photo de la masseuse en situation (mains en mouvement, préparation du matériel)</label></li>
+      </ul>
+
+      <table class="brief-table" style="margin-top:20px">
+        <thead><tr><th>Information demandée</th><th>La réponse</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>As-tu des photos professionnelles ?</strong></td>
+            <td>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="photos_dispo" value="oui_toutes" /> Oui, j'ai toutes les photos nécessaires</label>
+                <label class="radio-label"><input type="radio" name="photos_dispo" value="oui_partiel" /> Oui, mais seulement une partie</label>
+                <label class="radio-label"><input type="radio" name="photos_dispo" value="non" /> Non, je n'ai pas de photos</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Si non, quelle solution envisages-tu ?</strong></td>
+            <td>
+              <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" /> Shooting photo dédié (budget à prévoir)</label>
+                <label class="checkbox-label"><input type="checkbox" /> Banque d'images libres de droits (je délègue la sélection)</label>
+                <label class="checkbox-label"><input type="checkbox" /> Je vais prendre des photos moi-même</label>
+                <label class="checkbox-label"><input type="checkbox" /> À discuter ensemble</label>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-note">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+        <p>Pas de photos ? Deux options : un shooting dédié (budget à prévoir) ou l'utilisation de banques d'images libres de droits soigneusement choisies. Parlons-en ensemble.</p>
+      </div>
+    </section>
+
+    <!-- ================================================
+         SECTION 7 — CONTACT & MENTIONS LÉGALES
+         ================================================ -->
+    <section class="brief-section">
+      <div class="section-header section-header--teal">
+        <div class="section-header__num">8</div>
+        <h2>Contact et mentions légales</h2>
+        <span class="badge badge--priority">Prioritaire</span>
+      </div>
+      <p class="section-intro">Obligatoire pour la conformité du site.</p>
+
+      <table class="brief-table">
+        <thead><tr><th>Information demandée</th><th>La réponse</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Numéro de téléphone</strong><span class="hint">Celui affiché sur le site</span></td>
+            <td><input type="tel" name="tel" placeholder="06 XX XX XX XX" class="input-text" /></td>
+          </tr>
+          <tr>
+            <td><strong>Email de contact</strong></td>
+            <td><input type="email" name="email" placeholder="contact@exemple.fr" class="input-text" /></td>
+          </tr>
+          <tr>
+            <td><strong>Ville ou adresse de départ</strong><span class="hint">Même en domicile, une ville d'ancrage est utile</span></td>
+            <td><input type="text" name="ville" placeholder="Ex : Quartier Mpita" class="input-text" /></td>
+          </tr>
+          <tr>
+            <td><strong>Statut juridique</strong><span class="hint">Établissemnt, SARL, SA... (pour les CGV)</span></td>
+            <td>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="statut" value="ae" /> Établissemnt</label>
+                <label class="radio-label"><input type="radio" name="statut" value="eurl" /> SARL</label>
+                <label class="radio-label"><input type="radio" name="statut" value="sasu" /> SA</label>
+                <label class="radio-label"><input type="radio" name="statut" value="autre" /> Autre</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Numéro SIRET</strong></td>
+            <td><input type="text" name="siret" placeholder="XXX XXX XXX XXXXX" class="input-text" maxlength="17" /></td>
+          </tr>
+          <tr>
+            <td><strong>Réseaux sociaux</strong><span class="hint">Instagram, Facebook, TikTok... liens complets</span></td>
+            <td>
+              <div class="social-inputs">
+                <div class="social-input-row">
+                  <span class="social-icon">📷</span>
+                  <input type="url" name="instagram" placeholder="https://instagram.com/..." class="input-text" />
+                </div>
+                <div class="social-input-row">
+                  <span class="social-icon">👍</span>
+                  <input type="url" name="facebook" placeholder="https://facebook.com/..." class="input-text" />
+                </div>
+                <div class="social-input-row">
+                  <span class="social-icon">🎵</span>
+                  <input type="url" name="tiktok" placeholder="https://tiktok.com/@..." class="input-text" />
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Assurance professionnelle</strong><span class="hint">Compagnie + numéro de contrat (pour mentions légales)</span></td>
+            <td><textarea name="assurance" placeholder="À compléter..." rows="2"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ================================================
+         SECTION 8 — OBJECTIFS & STRATÉGIE
+         ================================================ -->
+    <section class="brief-section">
+      <div class="section-header section-header--teal">
+        <div class="section-header__num">9</div>
+        <h2>Objectifs et stratégie commerciale</h2>
+      </div>
+      <p class="section-intro">Ces informations permettent d'orienter les appels à l'action du site. Un site sans objectif clair est un site qui ne convertit pas.</p>
+
+      <table class="brief-table">
+        <thead><tr><th>Information demandée</th><th>La réponse</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Votre objectif principal</strong><span class="hint">Générer des appels ? Des réservations en ligne ? Les deux ?</span></td>
+            <td>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="objectif" value="appels" /> Générer des appels téléphoniques</label>
+                <label class="radio-label"><input type="radio" name="objectif" value="resa" /> Des réservations en ligne</label>
+                <label class="radio-label"><input type="radio" name="objectif" value="les_deux" /> Les deux</label>
+                <label class="radio-label"><input type="radio" name="objectif" value="notoriete" /> Avant tout, renforcer ma notoriété locale</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Offre de lancement envisagée</strong><span class="hint">Ex : -15% sur le 1er soin, offre parrainage...</span></td>
+            <td><textarea name="offre_lancement" placeholder="À compléter..." rows="3"></textarea></td>
+          </tr>
+          <tr>
+            <td><strong>Cartes cadeaux à vendre ?</strong><span class="hint">Oui / non, et si oui : montants, format (PDF, physique)</span></td>
+            <td>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="cartes_cadeaux" value="oui" /> Oui</label>
+                <label class="radio-label"><input type="radio" name="cartes_cadeaux" value="non" /> Non</label>
+                <label class="radio-label"><input type="radio" name="cartes_cadeaux" value="later" /> Pas maintenant, à prévoir plus tard</label>
+              </div>
+              <textarea name="cartes_details" placeholder="Si oui : montants, format..." rows="2" style="margin-top:8px"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Abonnements mensuels ?</strong><span class="hint">Forfait 4 séances, etc.</span></td>
+            <td>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="abonnements" value="oui" /> Oui</label>
+                <label class="radio-label"><input type="radio" name="abonnements" value="non" /> Non</label>
+                <label class="radio-label"><input type="radio" name="abonnements" value="later" /> À envisager</label>
+              </div>
+              <textarea name="abonnements_details" placeholder="Précisez les formules envisagées..." rows="2" style="margin-top:8px"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Cible principale</strong><span class="hint">Particuliers ? Entreprises ? Femmes enceintes ? Sportifs ?</span></td>
+            <td>
+              <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" /> Particuliers (tout public)</label>
+                <label class="checkbox-label"><input type="checkbox" /> Sportifs / athlètes</label>
+                <label class="checkbox-label"><input type="checkbox" /> Femmes enceintes</label>
+                <label class="checkbox-label"><input type="checkbox" /> Seniors</label>
+                <label class="checkbox-label"><input type="checkbox" /> Entreprises (séances au bureau)</label>
+                <label class="checkbox-label"><input type="checkbox" /> Couples</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Ce que tu souhaite éviter</strong><span class="hint">Ton trop médical, visuels trop « spa luxe »...</span></td>
+            <td><textarea name="eviter" placeholder="À compléter..." rows="3"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ================================================
+         RÉCAPITULATIF
+         ================================================ -->
+    <section class="brief-section recap-section">
+      <div class="recap-header">
+        <h2>Récapitulatif · Le minimum vital pour démarrer</h2>
+        <p>Voici les 6 éléments sans lesquels je ne peux pas commencer. Tout le reste peut être complété en phase 2 une fois la structure en place.</p>
+      </div>
+      <div class="recap-grid">
+        <div class="recap-item">
+          <div class="recap-item__num">1</div>
+          <p>Nom de marque ou service</p>
+        </div>
+        <div class="recap-item">
+          <div class="recap-item__num">2</div>
+          <p>Photo professionnelle de la masseuse</p>
+        </div>
+        <div class="recap-item">
+          <div class="recap-item__num">3</div>
+          <p>Liste complète des massages avec descriptions et prix</p>
+        </div>
+        <div class="recap-item">
+          <div class="recap-item__num">4</div>
+          <p>Zone géographique précise</p>
+        </div>
+        <div class="recap-item">
+          <div class="recap-item__num">5</div>
+          <p>Numéro de téléphone et email</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================
+         ET MAINTENANT ?
+         ================================================ -->
+    <div class="closing-box">
+      <h3>Et maintenant ?</h3>
+      <p>Tu peux remplir ce document directement, me répondre par email en reprenant les rubriques, ou programmer un appel pour qu'on fasse le tour ensemble. Le plus simple, c'est ce qui vous convient le mieux.</p>
+      <p style="margin-top:12px">Pour toute question sur ce brief, n'hésites pas. Aucune question n'est « bête » : mieux vaut clarifier au départ que corriger en cours de route.</p>
+      <div class="closing-box__actions no-print">
+        <button type="button" class="btn-action btn-action--primary" onclick="window.print()">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 7V3h10v4M5 14H3a1 1 0 01-1-1V8a1 1 0 011-1h14a1 1 0 011 1v5a1 1 0 01-1 1h-2M5 11h10v6H5v-6z"/></svg>
+          Imprimer / Sauvegarder en PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- PIED DE PAGE DU DOCUMENT -->
+    <footer class="doc-footer">
+      <p>Document confidentiel · Agence Web · <span id="year"></span></p>
+    </footer>
+
+  </main>
+
+  <script src="brief-client.js"></script>
+</body>
+</html>
