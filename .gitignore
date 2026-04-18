@@ -1,3 +1,7 @@
-/index.html
-/script.js
-/style.css
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Éditeurs
+.vscode/
+*.sublime-workspace
