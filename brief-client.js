@@ -84,35 +84,6 @@ if (addSoinBtn) {
   });
 }
 
-/* ---- Progression du formulaire ---- */
-function updateProgress() {
-  const allTextareas = document.querySelectorAll('textarea');
-  const allInputs    = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="url"]');
-  const filled = [...allTextareas, ...allInputs].filter(el => el.value.trim() !== '').length;
-  const total  = allTextareas.length + allInputs.length;
-  const pct    = Math.round((filled / total) * 100);
-
-  let bar = document.getElementById('progressBar');
-  if (!bar) {
-    const actionRight = document.querySelector('.action-bar__right');
-    if (!actionRight) return;
-    const wrap = document.createElement('div');
-    wrap.style.cssText = 'display:flex;align-items:center;gap:8px;font-size:.78rem;color:#666;';
-    wrap.innerHTML = `
-      <span id="progressPct">${pct}%</span>
-      <div style="width:80px;height:6px;background:#E5E5E5;border-radius:3px;overflow:hidden;">
-        <div id="progressBar" style="height:100%;background:#2E5D4B;border-radius:3px;transition:width .4s;width:${pct}%"></div>
-      </div>`;
-    actionRight.prepend(wrap);
-    return;
-  }
-  bar.style.width = pct + '%';
-  document.getElementById('progressPct').textContent = pct + '%';
-}
-
-document.addEventListener('input', updateProgress);
-document.addEventListener('change', updateProgress);
-updateProgress();
 
 /* ---- Sauvegarde locale (localStorage) ---- */
 const STORAGE_KEY = 'brief_massage_draft';
