@@ -31,10 +31,10 @@
 
   --container:   1200px;
   --nav-h:       100px;
-  --mobile-nav:  84px;
+  --mobile-nav:  96px;
 }
 
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; max-width: 100%; }
 
 body {
   font-family: var(--font-sans);
@@ -255,12 +255,12 @@ img { display: block; max-width: 100%; }
 .mobile-bottom-nav {
   position: fixed;
   bottom: 0; left: 0; right: 0;
-  height: var(--mobile-nav);
-  padding-bottom: env(safe-area-inset-bottom, 8px);
+  height: calc(var(--mobile-nav) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   background: var(--white);
   border-top: 2px solid var(--border);
   display: flex;
-  align-items: stretch;
+  align-items: center;
   z-index: 1000;
   box-shadow: 0 -6px 24px rgba(0,0,0,.14);
 }
@@ -416,15 +416,15 @@ img { display: block; max-width: 100%; }
 .hero__eyebrow {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: .62rem;
+  gap: 6px;
+  font-size: .58rem;
   font-weight: 600;
-  letter-spacing: .08em;
+  letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--gold);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow: visible;
+  max-width: 100%;
   margin-bottom: 0;
 }
 @media (min-width: 900px) {
