@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sérénité — Massage à Domicile</title>
+  <title>Maison Anaya — Massage à Domicile</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -15,41 +15,38 @@
   <header class="header" id="header">
     <div class="container header__inner">
       <a href="#" class="logo">
-        <span class="logo__mark">S</span>
-        <span class="logo__text">érénité</span>
+        <img src="images/logo.png" alt="Maison Anaya" class="logo__img" />
       </a>
+
+      <!-- Soins + Avis groupés à droite (mobile) -->
+      <div class="header-mobile-links">
+        <a href="#services" class="header-mobile-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/><path d="M8 12s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+          <span>Soins</span>
+        </a>
+        <a href="#avis" class="header-mobile-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <span>Avis</span>
+        </a>
+      </div>
+
+      <!-- Nav desktop -->
       <nav class="nav" id="nav">
         <a href="#services">Soins</a>
         <a href="#about">À propos</a>
         <a href="#avis">Avis</a>
-        <a href="#contact">Contact</a>
       </nav>
       <a href="#reservation" class="btn btn--primary header__cta">Réserver</a>
-      <button class="burger" id="burger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
     </div>
   </header>
 
-  <!-- ===== MOBILE NAV (lec.ma style bottom bar) ===== -->
+  <!-- ===== MOBILE NAV bottom bar ===== -->
   <nav class="mobile-bottom-nav" id="mobileNav">
-    <a href="#" class="mobile-nav__item active" data-label="Accueil">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
-      <span>Accueil</span>
-    </a>
-    <a href="#services" class="mobile-nav__item" data-label="Soins">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/><path d="M8 12s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
-      <span>Soins</span>
-    </a>
     <a href="#reservation" class="mobile-nav__item mobile-nav__item--cta" data-label="Réserver">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
       <span>Réserver</span>
     </a>
-    <a href="#avis" class="mobile-nav__item" data-label="Avis">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-      <span>Avis</span>
-    </a>
-    <a href="#contact" class="mobile-nav__item" data-label="Contact">
+    <a href="tel:+242055716062" class="mobile-nav__item" data-label="Contact">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .82h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 15.92z"/></svg>
       <span>Contact</span>
     </a>
@@ -61,27 +58,43 @@
       <div class="hero__overlay"></div>
     </div>
     <div class="container hero__content">
-      <p class="hero__eyebrow">Massage professionnel à domicile</p>
-      <h1 class="hero__title">Le bien-être,<br /><em>livré chez vous</em></h1>
-      <p class="hero__sub">Séances personnalisées par des thérapeutes certifiés.<br />Disponible 7j/7 dans un rayon de 30 km.</p>
+      <!-- Ligne 1 : eyebrow pleine largeur -->
+      <p class="hero__eyebrow">Massage professionnel à domicile · Pointe-Noire</p>
+
+      <!-- Ligne 2 : texte + photo côte à côte -->
+      <div class="hero__row">
+        <div class="hero__text">
+          <h1 class="hero__title">Le bien-être<br /><em>qui vient à vous</em></h1>
+          <p class="hero__sub">Soins personnalisés par Astrid, masseuse professionnelle.<br />Disponible 7j/7, de 9h à 21h.</p>
+        </div>
+        <div class="hero__portrait">
+          <a href="#about">
+            <img src="images/astrid.jpeg" alt="Astrid — Maison Anaya" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Ligne 3 : boutons sur la même ligne -->
       <div class="hero__actions">
         <a href="#reservation" class="btn btn--primary btn--lg">Réserver une séance</a>
         <a href="#services" class="btn btn--ghost btn--lg">Découvrir les soins</a>
       </div>
+
+      <!-- Ligne 4 : trust -->
       <div class="hero__trust">
         <div class="trust-item">
-          <strong>500+</strong>
-          <span>clients satisfaits</span>
+          <strong>4 ans</strong>
+          <span>d'expérience</span>
         </div>
         <div class="trust-divider"></div>
         <div class="trust-item">
-          <strong>4.9 ★</strong>
-          <span>note moyenne</span>
+          <strong>6 soins</strong>
+          <span>disponibles</span>
         </div>
         <div class="trust-divider"></div>
         <div class="trust-item">
           <strong>7j/7</strong>
-          <span>disponibilité</span>
+          <span>9h – 21h</span>
         </div>
       </div>
     </div>
@@ -90,10 +103,10 @@
     </div>
   </section>
 
-  <!-- ===== BANDEAU URGENCE ===== -->
+  <!-- ===== BANDEAU OFFRE DE LANCEMENT ===== -->
   <div class="urgency-bar">
     <div class="container">
-      <p>🕐 Prochain créneau disponible : <strong>Aujourd'hui à 18h00</strong> &nbsp;·&nbsp; <a href="#reservation">Réserver maintenant →</a></p>
+      <p>🎁 Offre de lancement : <strong>-15% sur votre 1er soin</strong> &nbsp;·&nbsp; <a href="#reservation">Réserver maintenant →</a></p>
     </div>
   </div>
 
@@ -112,11 +125,11 @@
           </div>
           <div class="service-card__body">
             <h3>Massage Relaxant</h3>
-            <p>Détente profonde du corps et de l'esprit. Idéal pour évacuer le stress du quotidien.</p>
+            <p>Gestes doux et enveloppants pour une profonde détente. Libère les tensions, apaise le stress et favorise un sommeil réparateur.</p>
             <div class="service-card__meta">
               <span class="tag">60 min</span>
               <span class="tag">90 min</span>
-              <span class="price">À partir de <strong>70€</strong></span>
+              <span class="price">À partir de <strong>25 000 FCFA</strong></span>
             </div>
             <a href="#reservation" class="btn btn--outline btn--sm">Réserver →</a>
           </div>
@@ -125,12 +138,11 @@
         <div class="service-card">
           <div class="service-card__img service-card__img--sportif"></div>
           <div class="service-card__body">
-            <h3>Massage Sportif</h3>
-            <p>Récupération musculaire ciblée pour les athlètes et les actifs. Avant ou après l'effort.</p>
+            <h3>Massage Tensions Profondes</h3>
+            <p>Cible les zones contractées pour libérer les muscles et apaiser les inconforts liés au stress ou à la fatigue accumulée.</p>
             <div class="service-card__meta">
               <span class="tag">60 min</span>
-              <span class="tag">90 min</span>
-              <span class="price">À partir de <strong>80€</strong></span>
+              <span class="price"><strong>30 000 FCFA</strong></span>
             </div>
             <a href="#reservation" class="btn btn--outline btn--sm">Réserver →</a>
           </div>
@@ -138,14 +150,31 @@
 
         <div class="service-card">
           <div class="service-card__img service-card__img--prenatal">
-            <div class="service-card__badge service-card__badge--sage">Douceur</div>
+            <div class="service-card__badge service-card__badge--sage">Sport</div>
           </div>
           <div class="service-card__body">
-            <h3>Massage Prénatal</h3>
-            <p>Soin doux et sécurisé pour les futures mamans. Soulagement des tensions et du dos.</p>
+            <h3>Massage Sportif</h3>
+            <p>Conçu pour préparer le corps à l'effort ou accélérer la récupération musculaire. Réduit les tensions et améliore les performances.</p>
+            <div class="service-card__meta">
+              <span class="tag">30 min</span>
+              <span class="tag">60 min</span>
+              <span class="price">À partir de <strong>20 000 FCFA</strong></span>
+            </div>
+            <a href="#reservation" class="btn btn--outline btn--sm">Réserver →</a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card__img service-card__img--pierre">
+            <div class="service-card__badge service-card__badge--gold">Cocooning</div>
+          </div>
+          <div class="service-card__body">
+            <h3>Massage à la Bougie Chaude</h3>
+            <p>Une bougie spéciale se transforme en huile tiède et nourrissante pour un massage fluide, relaxant et enveloppant. Peau douce et satinée.</p>
             <div class="service-card__meta">
               <span class="tag">60 min</span>
-              <span class="price">À partir de <strong>75€</strong></span>
+              <span class="tag">90 min</span>
+              <span class="price">À partir de <strong>30 000 FCFA</strong></span>
             </div>
             <a href="#reservation" class="btn btn--outline btn--sm">Réserver →</a>
           </div>
@@ -154,26 +183,11 @@
         <div class="service-card">
           <div class="service-card__img service-card__img--piedsmains"></div>
           <div class="service-card__body">
-            <h3>Réflexologie</h3>
-            <p>Stimulation des zones réflexes des pieds pour rééquilibrer l'organisme en profondeur.</p>
+            <h3>Massage des Pieds Relaxant</h3>
+            <p>Stimulation des zones réflexes pour libérer les tensions, améliorer la circulation et procurer un profond état de bien-être et légèreté.</p>
             <div class="service-card__meta">
-              <span class="tag">45 min</span>
-              <span class="price">À partir de <strong>55€</strong></span>
-            </div>
-            <a href="#reservation" class="btn btn--outline btn--sm">Réserver →</a>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-card__img service-card__img--pierre">
-            <div class="service-card__badge service-card__badge--gold">Premium</div>
-          </div>
-          <div class="service-card__body">
-            <h3>Pierres Chaudes</h3>
-            <p>Alliance de la chaleur et du massage pour une relaxation profonde et enveloppante.</p>
-            <div class="service-card__meta">
-              <span class="tag">90 min</span>
-              <span class="price">À partir de <strong>95€</strong></span>
+              <span class="tag">30 min</span>
+              <span class="price"><strong>12 000 FCFA</strong></span>
             </div>
             <a href="#reservation" class="btn btn--outline btn--sm">Réserver →</a>
           </div>
@@ -182,12 +196,11 @@
         <div class="service-card service-card--duo">
           <div class="service-card__img service-card__img--duo"></div>
           <div class="service-card__body">
-            <h3>Massage Duo</h3>
-            <p>Partagez un moment de détente à deux. Idéal en cadeau ou pour les couples.</p>
+            <h3>Massage Dos, Nuque &amp; Épaules</h3>
+            <p>Soin ciblé sur les zones les plus sollicitées. Relâche les muscles du dos, de la nuque et de la tête pour une légèreté immédiate.</p>
             <div class="service-card__meta">
-              <span class="tag">60 min</span>
-              <span class="tag">90 min</span>
-              <span class="price">À partir de <strong>130€</strong></span>
+              <span class="tag">30 min</span>
+              <span class="price"><strong>15 000 FCFA</strong></span>
             </div>
             <a href="#reservation" class="btn btn--outline btn--sm">Réserver →</a>
           </div>
@@ -202,7 +215,7 @@
     <div class="container">
       <div class="section__header">
         <p class="section__eyebrow">Simple et rapide</p>
-        <h2 class="section__title">En 3 étapes,<br /><em>votre masseur arrive</em></h2>
+        <h2 class="section__title">En 3 étapes,<br /><em>Astrid arrive chez vous</em></h2>
       </div>
       <div class="steps">
         <div class="step">
@@ -219,8 +232,8 @@
           <div class="step__icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="18" r="8"/><path d="M8 42c0-8.837 7.163-16 16-16s16 7.163 16 16"/></svg>
           </div>
-          <h3>Votre thérapeute vient</h3>
-          <p>Un professionnel certifié se déplace chez vous avec tout l'équipement nécessaire.</p>
+          <h3>Astrid se déplace</h3>
+          <p>Elle vient chez vous avec tout l'équipement nécessaire, dans votre quartier à Pointe-Noire.</p>
         </div>
         <div class="step__arrow">→</div>
         <div class="step">
@@ -228,8 +241,8 @@
           <div class="step__icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 4C13 4 4 13 4 24s9 20 20 20 20-9 20-20S35 4 24 4z"/><path d="M16 24l6 6 10-12"/></svg>
           </div>
-          <h3>Profitez & récupérez</h3>
-          <p>Restez chez vous, détendez-vous. Pas de trajet, pas de stress après la séance.</p>
+          <h3>Profitez &amp; récupérez</h3>
+          <p>Restez chez vous, détendez-vous pleinement. Pas de trajet, pas de stress après la séance.</p>
         </div>
       </div>
     </div>
@@ -240,30 +253,30 @@
     <div class="container about__inner">
       <div class="about__img">
         <div class="about__img-wrap">
-          <div class="about__img-placeholder"></div>
+          <img src="images/astrid.jpeg" alt="Astrid — Maison Anaya" class="about__photo" />
           <div class="about__badge">
-            <strong>8 ans</strong>
+            <strong>4 ans</strong>
             <span>d'expérience</span>
           </div>
         </div>
       </div>
       <div class="about__content">
         <p class="section__eyebrow">Votre thérapeute</p>
-        <h2 class="section__title">Sophie Martin,<br /><em>à votre service</em></h2>
-        <p class="about__text">Diplômée en kinésithérapie et formée aux techniques de massage bien-être en France et en Thaïlande, je me déplace chez vous pour vous offrir un moment de détente professionnel et personnalisé.</p>
-        <p class="about__text">Chaque séance est précédée d'un bilan pour adapter le soin à vos besoins spécifiques.</p>
+        <h2 class="section__title">Astrid,<br /><em>à votre service</em></h2>
+        <p class="about__text">Masseuse professionnelle, Astrid aide ses clients à relâcher les tensions et à retrouver leur bien-être. À l'écoute et attentive, elle adapte chaque soin aux besoins du corps et de l'esprit.</p>
+        <p class="about__text">Chaque séance est pensée pour vous : Astrid prend le temps d'échanger avec vous avant de commencer, afin que le soin soit parfaitement adapté à vos attentes.</p>
         <ul class="about__certs">
           <li>
             <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            Diplôme d'État de masseur-kinésithérapeute
+            Masseuse professionnelle certifiée
           </li>
           <li>
             <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            Certification massage thaïlandais traditionnel
+            Soins personnalisés &amp; adaptés à chaque client
           </li>
           <li>
             <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            Assurance professionnelle RC Pro
+            Déplacement à domicile dans tout Pointe-Noire
           </li>
         </ul>
         <a href="#reservation" class="btn btn--primary">Prendre rendez-vous</a>
@@ -276,47 +289,47 @@
     <div class="container">
       <div class="section__header">
         <p class="section__eyebrow">Ce qu'ils en disent</p>
-        <h2 class="section__title">Avis vérifiés<br /><em>Google & Trustpilot</em></h2>
+        <h2 class="section__title">Ils ont fait confiance<br /><em>à Maison Anaya</em></h2>
         <div class="reviews__global">
           <div class="stars">★★★★★</div>
-          <strong>4.9 / 5</strong>
-          <span>sur 127 avis</span>
+          <strong>5.0 / 5</strong>
+          <span>avis vérifiés</span>
         </div>
       </div>
       <div class="reviews__grid">
 
         <div class="review-card">
           <div class="review-card__stars">★★★★★</div>
-          <p>"Sophie est arrivée à l'heure, très professionnelle. Le massage relaxant était excellent, bien meilleur que chez les instituts. Je recommande les yeux fermés !"</p>
+          <p>"Astrid est arrivée à l'heure, très professionnelle et à l'écoute. Le massage relaxant était excellent, je me suis endormie tellement c'était agréable. Je recommande les yeux fermés !"</p>
           <div class="review-card__author">
             <div class="avatar">ML</div>
             <div>
-              <strong>Marie L.</strong>
-              <span>Paris 15e · il y a 2 semaines</span>
+              <strong>Marie-Laure</strong>
+              <span>Mpita · il y a 2 semaines</span>
             </div>
           </div>
         </div>
 
         <div class="review-card">
           <div class="review-card__stars">★★★★★</div>
-          <p>"Massage sportif après mon marathon. Résultat bluffant, récupération vraiment accélérée. Le fait de ne pas avoir à conduire après est un vrai plus."</p>
+          <p>"Massage sportif après une longue semaine de sport. Résultat bluffant, récupération vraiment accélérée. Et le fait de rester chez soi après c'est vraiment un plus immense."</p>
           <div class="review-card__author">
             <div class="avatar">TG</div>
             <div>
-              <strong>Thomas G.</strong>
-              <span>Boulogne · il y a 1 mois</span>
+              <strong>Théo G.</strong>
+              <span>Loandjili · il y a 1 mois</span>
             </div>
           </div>
         </div>
 
         <div class="review-card">
           <div class="review-card__stars">★★★★★</div>
-          <p>"Cadeau pour ma femme enceinte, elle était ravie ! Sophie a su mettre en confiance, expliquer chaque étape. On refera à coup sûr."</p>
+          <p>"Le massage à la bougie chaude est juste incroyable. Une expérience cocooning totale. Astrid est douce, professionnelle et vraiment à l'écoute. On refera à coup sûr !"</p>
           <div class="review-card__author">
             <div class="avatar">AC</div>
             <div>
-              <strong>Antoine C.</strong>
-              <span>Neuilly · il y a 3 semaines</span>
+              <strong>Amélie C.</strong>
+              <span>Centre-ville · il y a 3 semaines</span>
             </div>
           </div>
         </div>
@@ -338,23 +351,23 @@
       <div class="faq__list">
         <details class="faq__item">
           <summary>Dois-je prévoir du matériel ?</summary>
-          <p>Non, le thérapeute arrive avec la table de massage, les huiles et les draps propres. Vous n'avez besoin de rien.</p>
+          <p>Non, Astrid arrive avec tout le matériel nécessaire : table de massage, huiles, draps propres. Vous n'avez besoin de rien préparer.</p>
         </details>
         <details class="faq__item">
-          <summary>Quelle zone géographique couvrez-vous ?</summary>
-          <p>Nous intervenons dans Paris et la petite couronne (rayon de 30 km). Les déplacements au-delà font l'objet d'un forfait supplémentaire.</p>
+          <summary>Quels quartiers de Pointe-Noire desservez-vous ?</summary>
+          <p>Maison Anaya intervient dans de nombreux quartiers : Centre-ville, Tchikobo, Warf, Mpita, Aéroport, La Base, 31 Juillet, Songolo, Loandjili, Raffinerie, Siafoumou, Tchimbamba, Mahinga, Ngoyo et alentours.</p>
         </details>
         <details class="faq__item">
           <summary>Comment se passe le paiement ?</summary>
-          <p>Paiement sécurisé en ligne lors de la réservation (CB, PayPal) ou en espèces à la fin de la séance.</p>
+          <p>Le paiement s'effectue en ligne lors de la réservation (prépaiement sécurisé). Un délai minimum de 24h est requis pour toute réservation.</p>
         </details>
         <details class="faq__item">
-          <summary>Puis-je annuler ou modifier ma réservation ?</summary>
-          <p>Oui, jusqu'à 24h avant la séance sans frais. En dessous de 24h, des frais d'annulation de 50% s'appliquent.</p>
+          <summary>Puis-je annuler ou reporter ma réservation ?</summary>
+          <p>Toute annulation moins de 24h avant le rendez-vous n'est pas remboursable. Un report est possible une seule fois si demandé à l'avance, selon disponibilités. En cas d'annulation de notre part, vous pouvez choisir un report ou un remboursement intégral.</p>
         </details>
         <details class="faq__item">
           <summary>Le massage à domicile est-il aussi efficace qu'en institut ?</summary>
-          <p>Oui, et souvent plus car vous êtes dans votre environnement familier. La détente post-massage est aussi préservée — pas de trajet à faire après !</p>
+          <p>Oui, et souvent plus, car vous êtes dans votre environnement familier. La détente post-massage est préservée — pas de trajet à faire après ! Astrid adapte chaque soin à vos besoins spécifiques.</p>
         </details>
       </div>
     </div>
@@ -373,41 +386,41 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="prenom">Prénom</label>
-                <input type="text" id="prenom" placeholder="Marie" required />
+                <input type="text" id="prenom" placeholder="Votre prénom" required />
               </div>
               <div class="form-group">
                 <label for="nom">Nom</label>
-                <input type="text" id="nom" placeholder="Dupont" required />
+                <input type="text" id="nom" placeholder="Votre nom" required />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" placeholder="marie@exemple.com" required />
+                <input type="email" id="email" placeholder="votre@email.com" required />
               </div>
               <div class="form-group">
                 <label for="tel">Téléphone</label>
-                <input type="tel" id="tel" placeholder="06 XX XX XX XX" required />
+                <input type="tel" id="tel" placeholder="+242 0X XXX XX XX" required />
               </div>
             </div>
             <div class="form-group">
               <label for="adresse">Adresse complète</label>
-              <input type="text" id="adresse" placeholder="12 rue de la Paix, 75001 Paris" required />
+              <input type="text" id="adresse" placeholder="Votre quartier, rue, Pointe-Noire" required />
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="soin">Type de soin</label>
                 <select id="soin" required>
                   <option value="">Choisir un soin</option>
-                  <option>Massage Relaxant — 60 min (70€)</option>
-                  <option>Massage Relaxant — 90 min (95€)</option>
-                  <option>Massage Sportif — 60 min (80€)</option>
-                  <option>Massage Sportif — 90 min (110€)</option>
-                  <option>Massage Prénatal — 60 min (75€)</option>
-                  <option>Réflexologie — 45 min (55€)</option>
-                  <option>Pierres Chaudes — 90 min (95€)</option>
-                  <option>Massage Duo — 60 min (130€)</option>
-                  <option>Massage Duo — 90 min (180€)</option>
+                  <option>Massage Relaxant — 60 min (25 000 FCFA)</option>
+                  <option>Massage Relaxant — 90 min (35 000 FCFA)</option>
+                  <option>Massage Tensions Profondes — 60 min (30 000 FCFA)</option>
+                  <option>Massage Sportif — 30 min (20 000 FCFA)</option>
+                  <option>Massage Sportif — 60 min (35 000 FCFA)</option>
+                  <option>Massage Bougie Chaude — 60 min (30 000 FCFA)</option>
+                  <option>Massage Bougie Chaude — 90 min (40 000 FCFA)</option>
+                  <option>Massage Pieds Relaxant — 30 min (12 000 FCFA)</option>
+                  <option>Massage Dos, Nuque &amp; Épaules — 30 min (15 000 FCFA)</option>
                 </select>
               </div>
               <div class="form-group">
@@ -420,9 +433,10 @@
               <select id="heure" required>
                 <option value="">Choisir un créneau</option>
                 <option>09h00</option><option>10h00</option><option>11h00</option>
-                <option>12h00</option><option>14h00</option><option>15h00</option>
-                <option>16h00</option><option>17h00</option><option>18h00</option>
-                <option>19h00</option><option>20h00</option>
+                <option>12h00</option><option>13h00</option><option>14h00</option>
+                <option>15h00</option><option>16h00</option><option>17h00</option>
+                <option>18h00</option><option>19h00</option><option>20h00</option>
+                <option>21h00</option>
               </select>
             </div>
             <div class="form-group">
@@ -432,29 +446,37 @@
             <button type="submit" class="btn btn--primary btn--full btn--lg">
               Confirmer la réservation →
             </button>
-            <p class="form__note">Confirmation par SMS et email sous 15 minutes. Aucun prépaiement requis.</p>
+            <p class="form__note">Confirmation par email sous peu. Prépaiement en ligne requis. Délai minimum 24h.</p>
           </form>
         </div>
         <div class="reservation__info">
           <div class="info-card">
-            <div class="info-card__icon">📍</div>
+            <div class="info-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            </div>
             <h4>Zone desservie</h4>
-            <p>Paris et petite couronne, rayon 30 km.</p>
+            <p>Centre-ville, Mpita, Loandjili, Ngoyo, Tchikobo, Warf et bien d'autres quartiers de Pointe-Noire.</p>
           </div>
           <div class="info-card">
-            <div class="info-card__icon">🕐</div>
+            <div class="info-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            </div>
             <h4>Disponibilités</h4>
-            <p>Tous les jours de 9h à 21h, week-end inclus.</p>
+            <p>Tous les jours de 9h à 21h, lundi au dimanche. Réservation 24h à l'avance.</p>
           </div>
           <div class="info-card">
-            <div class="info-card__icon">💳</div>
+            <div class="info-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+            </div>
             <h4>Paiement</h4>
-            <p>CB en ligne ou espèces sur place. 100% sécurisé.</p>
+            <p>Prépaiement en ligne sécurisé lors de la réservation.</p>
           </div>
           <div class="info-card">
-            <div class="info-card__icon">🔄</div>
+            <div class="info-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M3 16l3 3a9 9 0 0 0 15-6"/><path d="M21 4v4h-4"/><path d="M3 20v-4h4"/></svg>
+            </div>
             <h4>Annulation</h4>
-            <p>Gratuite jusqu'à 24h avant la séance.</p>
+            <p>Remboursable si annulation plus de 24h avant. Un report possible sur demande.</p>
           </div>
         </div>
       </div>
@@ -462,14 +484,13 @@
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer">
+  <footer class="footer" id="contact">
     <div class="container footer__inner">
       <div class="footer__brand">
         <a href="#" class="logo logo--light">
-          <span class="logo__mark">S</span>
-          <span class="logo__text">érénité</span>
+          <span class="logo__mark-text">Maison <em>Anaya</em></span>
         </a>
-        <p>Massage professionnel à domicile.<br />Disponible 7j/7 à Paris et région.</p>
+        <p>Massage professionnel à domicile.<br />Disponible 7j/7 à Pointe-Noire.</p>
         <div class="footer__socials">
           <a href="#" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -483,37 +504,36 @@
         <h5>Soins</h5>
         <ul>
           <li><a href="#services">Massage Relaxant</a></li>
+          <li><a href="#services">Massage Tensions Profondes</a></li>
           <li><a href="#services">Massage Sportif</a></li>
-          <li><a href="#services">Massage Prénatal</a></li>
-          <li><a href="#services">Réflexologie</a></li>
-          <li><a href="#services">Pierres Chaudes</a></li>
-          <li><a href="#services">Massage Duo</a></li>
+          <li><a href="#services">Massage Bougie Chaude</a></li>
+          <li><a href="#services">Massage Pieds Relaxant</a></li>
+          <li><a href="#services">Massage Dos &amp; Épaules</a></li>
         </ul>
       </div>
       <div class="footer__col">
         <h5>Informations</h5>
         <ul>
-          <li><a href="#about">À propos</a></li>
+          <li><a href="#about">À propos d'Astrid</a></li>
           <li><a href="#avis">Avis clients</a></li>
-          <li><a href="#">Carte cadeau</a></li>
-          <li><a href="#">Abonnements</a></li>
-          <li><a href="#">Blog bien-être</a></li>
+          <li><a href="#reservation">Réserver en ligne</a></li>
+          <li><a href="#">Offre de lancement</a></li>
         </ul>
       </div>
       <div class="footer__col">
         <h5>Contact</h5>
         <ul>
-          <li><a href="tel:+33600000000">06 00 00 00 00</a></li>
-          <li><a href="mailto:contact@serenite.fr">contact@serenite.fr</a></li>
+          <li><a href="tel:+242055716062">+242 05 571 60 62</a></li>
+          <li><a href="mailto:contact@maisonanaya.com">contact@maisonanaya.com</a></li>
           <li><a href="#reservation">Réserver en ligne</a></li>
-          <li>Paris & Île-de-France</li>
+          <li>Quartier Mpita, Pointe-Noire</li>
           <li>Lun–Dim · 9h–21h</li>
         </ul>
       </div>
     </div>
     <div class="footer__bottom">
       <div class="container">
-        <p>© 2025 Sérénité · Massage à domicile · <a href="#">Mentions légales</a> · <a href="#">CGV</a> · <a href="#">Politique de confidentialité</a></p>
+        <p>© 2026 Maison Anaya · Massage à domicile · Pointe-Noire · <a href="#">Mentions légales</a> · <a href="#">CGV</a> · <a href="#">Politique de confidentialité</a></p>
       </div>
     </div>
   </footer>
