@@ -461,7 +461,7 @@ img { display: block; max-width: 100%; }
   align-items: center;
   gap: 0;
   flex-wrap: wrap;
-  margin-top: 16px;
+  margin-top: 8px;
 }
 .trust-item {
   display: flex;
