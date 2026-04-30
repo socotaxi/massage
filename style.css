@@ -218,6 +218,7 @@ img { display: block; max-width: 100%; }
   .header-mobile-links {
     order: 3;
     display: flex;
+    padding-right: 12px;
     align-items: center;
     gap: 20px;
   }
@@ -319,6 +320,11 @@ img { display: block; max-width: 100%; }
   align-items: center;
   overflow: hidden;
 }
+@media (max-width: 767px) {
+  .hero {
+    align-items: flex-start;
+  }
+}
 .hero__bg {
   position: absolute;
   inset: 0;
@@ -343,7 +349,7 @@ img { display: block; max-width: 100%; }
 .hero__content {
   position: relative;
   z-index: 2;
-  padding: 110px 16px 60px;
+  padding: 108px 16px 60px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -454,7 +460,7 @@ img { display: block; max-width: 100%; }
   align-items: center;
   gap: 0;
   flex-wrap: wrap;
-  margin-top: -35px;
+  margin-top: 16px;
 }
 .trust-item {
   display: flex;
