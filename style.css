@@ -31,7 +31,7 @@
 
   --container:   1200px;
   --nav-h:       100px;
-  --mobile-nav:  72px;
+  --mobile-nav:  84px;
 }
 
 html { scroll-behavior: smooth; font-size: 16px; }
@@ -256,12 +256,13 @@ img { display: block; max-width: 100%; }
   position: fixed;
   bottom: 0; left: 0; right: 0;
   height: var(--mobile-nav);
+  padding-bottom: env(safe-area-inset-bottom, 8px);
   background: var(--white);
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--border);
   display: flex;
   align-items: stretch;
   z-index: 1000;
-  box-shadow: 0 -4px 20px rgba(0,0,0,.08);
+  box-shadow: 0 -6px 24px rgba(0,0,0,.14);
 }
 @media (min-width: 768px) { .mobile-bottom-nav { display: none; } }
 
