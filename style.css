@@ -847,15 +847,17 @@ img { display: block; max-width: 100%; }
   gap: 40px;
   align-items: start;
 }
+.reservation__inner > * { min-width: 0; }
 @media (min-width: 900px) { .reservation__inner { grid-template-columns: 2fr 1fr; } }
 
 /* Form */
 .reservation-form {
   background: var(--beige);
   border-radius: var(--radius-lg);
-  padding: 36px;
+  padding: 20px 16px;
   border: 1px solid var(--border);
 }
+@media (min-width: 480px) { .reservation-form { padding: 36px; } }
 
 .form-row {
   display: grid;
