@@ -3,11 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Maison Anaya — Massage à Domicile</title>
+  <title>Maison Anaya — Massage Professionnel à Domicile | Pointe-Noire</title>
+  <meta name="description" content="Massage professionnel à domicile à Pointe-Noire avec Astrid. Relaxant, tensions profondes, sportif, bougie chaude. Disponible 7j/7 de 9h à 21h. Première séance –15%." />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Maison Anaya — Massage Professionnel à Domicile | Pointe-Noire" />
+  <meta property="og:description" content="Massage professionnel à domicile avec Astrid. Relaxant, sportif, bougie chaude… Disponible 7j/7, 9h–21h à Pointe-Noire. Première séance –15%." />
+  <meta property="og:image" content="images/astrid.jpeg" />
+  <meta property="og:locale" content="fr_CG" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HealthAndBeautyBusiness",
+    "name": "Maison Anaya",
+    "description": "Massage professionnel à domicile à Pointe-Noire. Soins relaxants, sportifs et bien-être disponibles 7j/7.",
+    "image": "images/astrid.jpeg",
+    "telephone": "+242055716062",
+    "email": "contact@maisonanaya.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Pointe-Noire",
+      "addressCountry": "CG"
+    },
+    "areaServed": "Pointe-Noire",
+    "priceRange": "12000–40000 FCFA",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "09:00",
+      "closes": "21:00"
+    },
+    "url": "https://maisonanaya.com"
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon.png" />
+  <meta name="theme-color" content="#1C1C1C" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -104,12 +144,26 @@
     </div>
   </section>
 
-  <!-- ===== BANDEAU OFFRE DE LANCEMENT ===== -->
-  <div class="urgency-bar">
-    <div class="container">
-      <p>🎁 Offre de lancement : <strong>-15% sur votre 1er soin</strong> &nbsp;·&nbsp; <a href="#reservation">Réserver maintenant →</a></p>
+  <!-- ===== OFFRE DE LANCEMENT ===== -->
+  <section class="offre-lancement" id="offre">
+    <div class="offre-lancement__deco offre-lancement__deco--tl"></div>
+    <div class="offre-lancement__deco offre-lancement__deco--br"></div>
+    <div class="offre-lancement__inner">
+      <span class="offre-lancement__eyebrow">Offre limitée</span>
+      <h2 class="offre-lancement__title">Offre de lancement</h2>
+      <p class="offre-lancement__discount">-15%<sup>*</sup></p>
+      <p class="offre-lancement__subtitle">Sur votre 1<sup>er</sup> soin</p>
+      <a class="offre-lancement__cta" href="#reservation">
+        <span>Réserver maintenant</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </div>
-  </div>
+    <div class="offre-lancement__footnote">
+      <div class="container">
+        <p>* Offre valable pour les nouveaux clients uniquement &nbsp;·&nbsp; Non cumulable avec d'autres promotions</p>
+      </div>
+    </div>
+  </section>
 
   <!-- ===== SERVICES ===== -->
   <section class="section services" id="services">
@@ -227,7 +281,7 @@
           <h3>Choisissez votre soin</h3>
           <p>Sélectionnez le massage et la durée qui vous conviennent, selon vos besoins du moment.</p>
         </div>
-        <div class="step__arrow">→</div>
+        <div class="step__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
         <div class="step">
           <div class="step__number">02</div>
           <div class="step__icon">
@@ -236,7 +290,7 @@
           <h3>Astrid se déplace</h3>
           <p>Elle vient chez vous avec tout l'équipement nécessaire, dans votre quartier à Pointe-Noire.</p>
         </div>
-        <div class="step__arrow">→</div>
+        <div class="step__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
         <div class="step">
           <div class="step__number">03</div>
           <div class="step__icon">
@@ -254,7 +308,7 @@
     <div class="container about__inner">
       <div class="about__img">
         <div class="about__img-wrap">
-          <img src="images/astrid.jpeg" alt="Astrid — Maison Anaya" class="about__photo" />
+          <img src="images/astrid.jpeg" alt="Astrid — Maison Anaya" class="about__photo" loading="lazy" />
           <div class="about__badge">
             <strong>4 ans</strong>
             <span>d'expérience</span>
@@ -292,50 +346,56 @@
         <p class="section__eyebrow">Ce qu'ils en disent</p>
         <h2 class="section__title">Ils ont fait confiance<br /><em>à Maison Anaya</em></h2>
         <div class="reviews__global">
-          <div class="stars">★★★★★</div>
-          <strong>5.0 / 5</strong>
-          <span>avis vérifiés</span>
+          <div class="stars" id="reviewsStars">★★★★★</div>
+          <strong id="reviewsAvg">5.0 / 5</strong>
+          <span id="reviewsCount">3 avis vérifiés</span>
         </div>
       </div>
-      <div class="reviews__grid">
-
-        <div class="review-card">
-          <div class="review-card__stars">★★★★★</div>
-          <p>"Astrid est arrivée à l'heure, très professionnelle et à l'écoute. Le massage relaxant était excellent, je me suis endormie tellement c'était agréable. Je recommande les yeux fermés !"</p>
-          <div class="review-card__author">
-            <div class="avatar">ML</div>
-            <div>
-              <strong>Marie-Laure</strong>
-              <span>Mpita · il y a 2 semaines</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="review-card">
-          <div class="review-card__stars">★★★★★</div>
-          <p>"Massage sportif après une longue semaine de sport. Résultat bluffant, récupération vraiment accélérée. Et le fait de rester chez soi après c'est vraiment un plus immense."</p>
-          <div class="review-card__author">
-            <div class="avatar">TG</div>
-            <div>
-              <strong>Théo G.</strong>
-              <span>Loandjili · il y a 1 mois</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="review-card">
-          <div class="review-card__stars">★★★★★</div>
-          <p>"Le massage à la bougie chaude est juste incroyable. Une expérience cocooning totale. Astrid est douce, professionnelle et vraiment à l'écoute. On refera à coup sûr !"</p>
-          <div class="review-card__author">
-            <div class="avatar">AC</div>
-            <div>
-              <strong>Amélie C.</strong>
-              <span>Centre-ville · il y a 3 semaines</span>
-            </div>
-          </div>
-        </div>
-
+      <div class="reviews__grid" id="reviewsGrid"></div>
+      <div class="reviews__pagination" id="reviewsPagination" hidden>
+        <button class="pagination__btn" id="paginationPrev" aria-label="Page précédente">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <span class="pagination__info" id="paginationInfo"></span>
+        <button class="pagination__btn" id="paginationNext" aria-label="Page suivante">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
+      <!-- Formulaire — laisser un avis -->
+      <div class="reviews__submit">
+        <button class="btn btn--outline reviews__submit-btn" id="toggleReviewForm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><span>Partager votre expérience</span></button>
+        <form id="reviewForm" class="review-form" hidden>
+          <p class="review-form__title">Votre avis compte</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="rv-prenom">Prénom *</label>
+              <input type="text" id="rv-prenom" placeholder="Votre prénom" maxlength="40" />
+            </div>
+            <div class="form-group">
+              <label for="rv-quartier">Quartier (optionnel)</label>
+              <input type="text" id="rv-quartier" placeholder="Ex : Mpita" maxlength="40" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Votre note *</label>
+            <div class="star-picker" id="starPicker">
+              <button type="button" class="star-btn" data-val="1">★</button>
+              <button type="button" class="star-btn" data-val="2">★</button>
+              <button type="button" class="star-btn" data-val="3">★</button>
+              <button type="button" class="star-btn" data-val="4">★</button>
+              <button type="button" class="star-btn" data-val="5">★</button>
+            </div>
+            <input type="hidden" id="rv-note" value="0" />
+          </div>
+          <div class="form-group">
+            <label for="rv-texte">Votre expérience *</label>
+            <textarea id="rv-texte" rows="4" placeholder="Décrivez votre séance avec Astrid..." maxlength="500"></textarea>
+          </div>
+          <p id="rv-error" class="rv-error" hidden>Merci de renseigner votre prénom, une note (★) et votre avis.</p>
+          <button type="submit" class="btn btn--primary">Publier mon avis →</button>
+        </form>
+      </div>
+
       <div class="reviews__cta">
         <a href="#reservation" class="btn btn--primary btn--lg">Rejoindre nos clients satisfaits</a>
       </div>
@@ -447,7 +507,7 @@
             <button type="submit" class="btn btn--primary btn--full btn--lg">
               Confirmer la réservation →
             </button>
-            <p class="form__note">Confirmation par email sous peu. Prépaiement en ligne requis. Délai minimum 24h.</p>
+            <p class="form__note">Confirmation par sms ou whatsapp sous peu. Délai minimum 24h.</p>
           </form>
         </div>
         <div class="reservation__info">
@@ -534,11 +594,28 @@
     </div>
     <div class="footer__bottom">
       <div class="container">
-        <p>© 2026 Maison Anaya · Massage à domicile · Pointe-Noire · <a href="#">Mentions légales</a> · <a href="#">CGV</a> · <a href="#">Politique de confidentialité</a></p>
+        <p>© 2026 Maison Anaya · Massage à domicile · Pointe-Noire · <a href="mentions-legales.html">Mentions légales</a> · <a href="cgv.html">CGV</a> · <a href="politique-de-confidentialite.html">Politique de confidentialité</a> · <a href="admin.html" style="opacity:.45;">Admin</a></p>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <!-- ===== MODAL CONFIRMATION ===== -->
+  <div id="confirmModal" class="confirm-modal" hidden aria-modal="true" role="dialog">
+    <div class="confirm-modal__overlay" id="confirmModalOverlay"></div>
+    <div class="confirm-modal__card">
+      <button class="confirm-modal__close" id="confirmModalClose" aria-label="Fermer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <div class="confirm-modal__top">
+        <img src="images/astrid.jpeg" alt="Astrid" class="confirm-modal__photo" />
+        <div class="confirm-modal__check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <h3 class="confirm-modal__title">Réservation confirmée</h3>
+      <div class="confirm-modal__details" id="confirmDetails"></div>
+      <p class="confirm-modal__note">Une confirmation vous sera envoyée par sms ou whatsapp sous peu. Délai minimum 24h avant la séance.</p>
+      <button class="btn btn--primary confirm-modal__btn" id="confirmModalOk">Parfait, merci !</button>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
 </body>
 </html>

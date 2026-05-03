@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Politique de confidentialité — Maison Anaya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .legal-hero {
+      background: var(--dark);
+      padding: 100px 0 60px;
+      text-align: center;
+    }
+    .legal-hero__eyebrow {
+      color: var(--gold);
+      font-size: .75rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .legal-hero__title {
+      color: var(--white);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-family: var(--font-serif);
+      font-weight: 400;
+    }
+    .legal-hero__title em { color: var(--gold); font-style: italic; }
+    .legal-content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+    }
+    .legal-content h2 {
+      font-size: 1.4rem;
+      color: var(--dark);
+      margin: 48px 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--beige-dark);
+    }
+    .legal-content h2:first-of-type { margin-top: 0; }
+    .legal-content p {
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 14px;
+      font-size: .95rem;
+    }
+    .legal-content ul {
+      margin: 0 0 14px 20px;
+      color: var(--gray);
+      font-size: .95rem;
+      line-height: 1.8;
+    }
+    .legal-content li { margin-bottom: 6px; }
+    .legal-content strong { color: var(--dark); }
+    .legal-content a { color: var(--sage-dark); text-decoration: underline; }
+    .legal-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--sage-dark);
+      font-size: .85rem;
+      font-weight: 500;
+      margin-bottom: 48px;
+    }
+    .legal-back svg { width: 16px; height: 16px; }
+    .data-card {
+      background: var(--beige);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 16px 0 24px;
+      display: grid;
+      gap: 10px;
+    }
+    .data-card__row {
+      display: flex;
+      gap: 12px;
+      font-size: .9rem;
+      align-items: flex-start;
+    }
+    .data-card__label {
+      font-weight: 600;
+      color: var(--dark);
+      min-width: 140px;
+      flex-shrink: 0;
+    }
+    .data-card__val { color: var(--gray); }
+    .legal-footer-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--beige-dark);
+    }
+    .legal-footer-links a { color: var(--gray); font-size: .85rem; }
+    .legal-footer-links a:hover { color: var(--sage-dark); }
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 16px 0 24px;
+    }
+    .right-item {
+      background: var(--beige);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+    .right-item__title {
+      font-weight: 600;
+      color: var(--dark);
+      font-size: .9rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .right-item__title svg { width: 16px; height: 16px; stroke: var(--gold); }
+    .right-item p { font-size: .85rem; margin: 0; }
+  </style>
+</head>
+<body>
+
+  <header class="header scrolled" id="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="Maison Anaya" class="logo__img" />
+      </a>
+      <nav class="nav">
+        <a href="index.html#services">Soins</a>
+        <a href="index.html#about">À propos</a>
+        <a href="index.html#avis">Avis</a>
+      </nav>
+      <a href="index.html#reservation" class="btn btn--primary header__cta">Réserver</a>
+    </div>
+  </header>
+
+  <div class="legal-hero">
+    <div class="container">
+      <p class="legal-hero__eyebrow">Protection des données</p>
+      <h1 class="legal-hero__title">Politique de <em>confidentialité</em></h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="legal-content">
+
+      <a href="index.html" class="legal-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Retour à l'accueil
+      </a>
+
+      <h2>Responsable du traitement</h2>
+      <div class="data-card">
+        <div class="data-card__row"><span class="data-card__label">Entité</span><span class="data-card__val">Maison Anaya</span></div>
+        <div class="data-card__row"><span class="data-card__label">Responsable</span><span class="data-card__val">Astrid Anaya</span></div>
+        <div class="data-card__row"><span class="data-card__label">Adresse</span><span class="data-card__val">Quartier Mpita, Pointe-Noire, République du Congo</span></div>
+        <div class="data-card__row"><span class="data-card__label">Email</span><span class="data-card__val"><a href="mailto:contact@maisonanaya.com">contact@maisonanaya.com</a></span></div>
+        <div class="data-card__row"><span class="data-card__label">Téléphone</span><span class="data-card__val"><a href="tel:+242055716062">+242 05 571 60 62</a></span></div>
+      </div>
+
+      <h2>Données collectées</h2>
+      <p>Dans le cadre de la prise de rendez-vous en ligne, Maison Anaya collecte les données personnelles suivantes :</p>
+      <ul>
+        <li><strong>Identité :</strong> prénom, nom</li>
+        <li><strong>Coordonnées :</strong> adresse email, numéro de téléphone</li>
+        <li><strong>Adresse :</strong> quartier et adresse du lieu d'intervention</li>
+        <li><strong>Informations sur la prestation :</strong> type de soin souhaité, date et heure</li>
+        <li><strong>Informations complémentaires :</strong> douleurs particulières ou contre-indications renseignées librement</li>
+      </ul>
+      <p>Dans le cadre des avis clients, nous collectons également :</p>
+      <ul>
+        <li>Prénom et quartier (optionnel)</li>
+        <li>Note et commentaire</li>
+      </ul>
+
+      <h2>Finalités du traitement</h2>
+      <p>Les données collectées sont utilisées exclusivement pour :</p>
+      <ul>
+        <li>La gestion et la confirmation des réservations de séances</li>
+        <li>La communication avec le client (confirmation, rappel, suivi)</li>
+        <li>L'amélioration de nos services à partir des avis laissés</li>
+        <li>La prévention des créneaux en double</li>
+      </ul>
+      <p>Vos données ne sont <strong>jamais vendues, revendues ni partagées</strong> avec des tiers à des fins commerciales.</p>
+
+      <h2>Base légale</h2>
+      <p>Le traitement de vos données repose sur :</p>
+      <ul>
+        <li><strong>L'exécution d'un contrat :</strong> la réservation d'une séance constitue un engagement contractuel</li>
+        <li><strong>Le consentement :</strong> pour les avis clients publiés sur le site</li>
+        <li><strong>L'intérêt légitime :</strong> pour la gestion interne de l'agenda</li>
+      </ul>
+
+      <h2>Durée de conservation</h2>
+      <p>Vos données personnelles sont conservées pendant les durées suivantes :</p>
+      <ul>
+        <li><strong>Données de réservation :</strong> 2 ans à compter de la date de la séance</li>
+        <li><strong>Avis clients :</strong> jusqu'à suppression sur demande ou retrait du consentement</li>
+      </ul>
+
+      <h2>Hébergement des données</h2>
+      <p>Vos données sont stockées sur les serveurs de <strong>Supabase Inc.</strong> (Singapore), dans un environnement sécurisé avec chiffrement en transit (HTTPS/TLS). Supabase est un sous-traitant technique soumis à des engagements de confidentialité stricts.</p>
+
+      <h2>Vos droits</h2>
+      <p>Conformément aux réglementations applicables en matière de protection des données, vous disposez des droits suivants :</p>
+
+      <div class="rights-grid">
+        <div class="right-item">
+          <div class="right-item__title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            Droit d'accès
+          </div>
+          <p>Obtenir une copie de vos données personnelles détenues par Maison Anaya.</p>
+        </div>
+        <div class="right-item">
+          <div class="right-item__title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Droit de rectification
+          </div>
+          <p>Corriger des données inexactes ou incomplètes vous concernant.</p>
+        </div>
+        <div class="right-item">
+          <div class="right-item__title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+            Droit à l'effacement
+          </div>
+          <p>Demander la suppression de vos données (droit à l'oubli).</p>
+        </div>
+        <div class="right-item">
+          <div class="right-item__title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Droit d'opposition
+          </div>
+          <p>Vous opposer au traitement de vos données pour motif légitime.</p>
+        </div>
+        <div class="right-item">
+          <div class="right-item__title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            Droit à la portabilité
+          </div>
+          <p>Recevoir vos données dans un format structuré et lisible.</p>
+        </div>
+        <div class="right-item">
+          <div class="right-item__title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            Droit de limitation
+          </div>
+          <p>Demander la suspension temporaire du traitement de vos données.</p>
+        </div>
+      </div>
+
+      <p>Pour exercer l'un de ces droits, contactez-nous par email à <a href="mailto:contact@maisonanaya.com">contact@maisonanaya.com</a> ou par téléphone au <a href="tel:+242055716062">+242 05 571 60 62</a>. Nous nous engageons à répondre dans un délai de 30 jours.</p>
+
+      <h2>Cookies</h2>
+      <p>Ce site utilise uniquement des cookies techniques strictement nécessaires à son fonctionnement :</p>
+      <ul>
+        <li><strong>Supabase (session) :</strong> nécessaire au bon fonctionnement du formulaire de réservation et des avis</li>
+      </ul>
+      <p>Aucun cookie publicitaire, de tracking ou de profilage n'est déposé sur votre navigateur.</p>
+
+      <h2>Sécurité</h2>
+      <p>Maison Anaya met en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données contre tout accès non autorisé, perte, altération ou divulgation :</p>
+      <ul>
+        <li>Transmission des données chiffrée via HTTPS</li>
+        <li>Accès aux données limité aux seules personnes autorisées</li>
+        <li>Politique de contrôle d'accès (Row Level Security) sur la base de données</li>
+      </ul>
+
+      <h2>Modifications de la politique</h2>
+      <p>Maison Anaya se réserve le droit de modifier la présente politique de confidentialité à tout moment. Les modifications entrent en vigueur dès leur publication sur cette page. Nous vous encourageons à la consulter régulièrement.</p>
+
+      <h2>Contact</h2>
+      <p>Pour toute question relative à la protection de vos données personnelles :</p>
+      <ul>
+        <li><strong>Email :</strong> <a href="mailto:contact@maisonanaya.com">contact@maisonanaya.com</a></li>
+        <li><strong>Téléphone :</strong> <a href="tel:+242055716062">+242 05 571 60 62</a></li>
+        <li><strong>Adresse :</strong> Quartier Mpita, Pointe-Noire, République du Congo</li>
+      </ul>
+
+      <p style="margin-top:32px;font-size:.82rem;color:var(--gray)"><em>Dernière mise à jour : mai 2026</em></p>
+
+      <div class="legal-footer-links">
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="cgv.html">CGV</a>
+        <a href="politique-de-confidentialite.html">Politique de confidentialité</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__bottom">
+      <div class="container">
+        <p>© 2026 Maison Anaya · Massage à domicile · Pointe-Noire · <a href="mentions-legales.html">Mentions légales</a> · <a href="cgv.html">CGV</a> · <a href="politique-de-confidentialite.html">Politique de confidentialité</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
