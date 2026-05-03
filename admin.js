@@ -13,9 +13,10 @@ const REVIEWS_PER_PAGE = 10;
 let sb;
 let allReservations = [];
 let allReviews      = [];
-let currentPeriod   = 'day';
+let currentPeriod   = 'all';
 let reviewsPage     = 1;
-let pendingDeleteId = null;
+let pendingDeleteId   = null;
+let pendingDeleteType = null; // 'review' | 'reservation'
 
 /* ── Initialisation ──────────────────────────────────────── */
 
@@ -49,6 +50,7 @@ function bindEvents() {
   document.getElementById('loginForm').addEventListener('submit', handleLogin);
   document.getElementById('logoutBtn').addEventListener('click', handleLogout);
   document.getElementById('refreshBtn').addEventListener('click', handleRefresh);
+  document.getElementById('exportBtn').addEventListener('click', handleExportPDF);
 
   // Onglets de période
   document.querySelectorAll('.period-tab').forEach(btn => {
@@ -56,8 +58,7 @@ function bindEvents() {
       currentPeriod = btn.dataset.period;
       document.querySelectorAll('.period-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      updateStats();
-      updateServicesChart();
+      refreshPeriodViews();
     });
   });
 
@@ -89,8 +90,11 @@ function bindEvents() {
 
   // Délégation : actions sur les réservations
   document.getElementById('reservationsTbody').addEventListener('click', e => {
-    const btn = e.target.closest('[data-action="show-detail"]');
-    if (btn) showReservationDetail(btn.dataset.id);
+    const btnDetail = e.target.closest('[data-action="show-detail"]');
+    if (btnDetail) showReservationDetail(btnDetail.dataset.id);
+
+    const btnDelete = e.target.closest('[data-action="delete-reservation"]');
+    if (btnDelete) openDeleteModal(btnDelete.dataset.id, btnDelete.dataset.label, 'reservation');
   });
 
   // Délégation : pagination
@@ -165,12 +169,23 @@ async function loadReservations() {
     .order('date',  { ascending: true })
     .order('heure', { ascending: true });
 
-  if (!error && data) {
-    allReservations = data;
-    updateStats();
-    renderReservations();
-    updateServicesChart();
+  if (error) {
+    console.error('Erreur chargement réservations:', error);
+    document.getElementById('reservationsTbody').innerHTML =
+      `<tr><td colspan="7" class="td-center td-muted">
+        Erreur de chargement : ${error.message}<br>
+        <small>Vérifiez les policies RLS de la table <strong>reservations</strong> dans Supabase
+        (autoriser SELECT pour les utilisateurs authentifiés).</small>
+      </td></tr>`;
+    return;
   }
+
+  allReservations = data || [];
+  if (allReservations.length === 0) {
+    console.warn('Table reservations vide ou accès bloqué par RLS.');
+  }
+  refreshPeriodViews();
+  renderReservations();
 }
 
 async function loadReviews() {
@@ -179,11 +194,14 @@ async function loadReviews() {
     .select('*')
     .order('created_at', { ascending: false });
 
-  if (!error && data) {
-    allReviews = data;
-    renderReviewStats();
-    renderReviews();
+  if (error) {
+    console.error('Erreur chargement avis:', error);
+    return;
   }
+
+  allReviews = data || [];
+  renderReviewStats();
+  renderReviews();
 }
 
 async function handleRefresh() {
@@ -198,6 +216,61 @@ async function handleRefresh() {
 function setLastUpdated() {
   const now = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
   document.getElementById('lastUpdated').textContent = `Données mises à jour à ${now}`;
+}
+
+/* ── Export PDF ──────────────────────────────────────────── */
+
+async function handleExportPDF() {
+  const btn = document.getElementById('exportBtn');
+  btn.disabled = true;
+  btn.textContent = 'Préparation…';
+
+  // Sauvegarde de l'état actuel
+  const savedFilter = document.getElementById('reservationsFilter').value;
+  const savedPage   = reviewsPage;
+
+  // Mise à jour de la date d'impression
+  document.getElementById('printDate').textContent =
+    'Édité le ' + new Date().toLocaleDateString('fr-FR', {
+      weekday: 'long', day: '2-digit', month: 'long', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+  document.getElementById('printHeader').hidden = false;
+
+  // Tout afficher pour l'impression
+  document.getElementById('reservationsFilter').value = 'all';
+  renderReservations();
+  renderAllReviewsForPrint();
+
+  // Laisser le DOM se mettre à jour avant l'impression synchrone
+  await new Promise(r => setTimeout(r, 120));
+  window.print();
+
+  // Restaurer l'état
+  document.getElementById('printHeader').hidden = true;
+  if (savedFilter !== 'all') {
+    document.getElementById('reservationsFilter').value = savedFilter;
+    renderReservations();
+  }
+  reviewsPage = savedPage;
+  renderReviews();
+
+  btn.disabled = false;
+  btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <line x1="12" y1="18" x2="12" y2="12"/>
+    <line x1="9" y1="15" x2="15" y2="15"/>
+  </svg> Exporter PDF`;
+}
+
+function renderAllReviewsForPrint() {
+  const sorted    = getSortedReviews();
+  const container = document.getElementById('reviewsList');
+  container.innerHTML = sorted.length
+    ? sorted.map(buildReviewRow).join('')
+    : '<p class="no-data-msg">Aucun avis pour le moment.</p>';
+  document.getElementById('reviewsPagination').innerHTML = '';
 }
 
 /* ── Statistiques ────────────────────────────────────────── */
@@ -216,15 +289,18 @@ function getDateRange(period) {
   if (period === 'day') return { start: today, end: today };
 
   if (period === 'week') {
-    const d   = new Date(now);
-    const day = d.getDay() || 7;
-    d.setDate(d.getDate() - day + 1);
-    return { start: toLocalDateStr(d), end: today };
+    const start = new Date(now);
+    const day   = start.getDay() || 7;
+    start.setDate(start.getDate() - day + 1);        // lundi
+    const end = new Date(start);
+    end.setDate(start.getDate() + 6);                // dimanche
+    return { start: toLocalDateStr(start), end: toLocalDateStr(end) };
   }
 
   if (period === 'month') {
-    const d = new Date(now.getFullYear(), now.getMonth(), 1);
-    return { start: toLocalDateStr(d), end: today };
+    const start = new Date(now.getFullYear(), now.getMonth(), 1);
+    const end   = new Date(now.getFullYear(), now.getMonth() + 1, 0); // dernier jour du mois
+    return { start: toLocalDateStr(start), end: toLocalDateStr(end) };
   }
 
   return { start: '2000-01-01', end: '9999-12-31' };
@@ -246,8 +322,13 @@ function formatCFA(amount) {
   return new Intl.NumberFormat('fr-FR').format(amount) + ' FCFA';
 }
 
-function updateStats() {
+function refreshPeriodViews() {
   const filtered = filterByPeriod(allReservations, currentPeriod);
+  updateStats(filtered);
+  updateServicesChart(filtered);
+}
+
+function updateStats(filtered) {
   const revenue  = filtered.reduce((s, r) => s + extractPrice(r.soin), 0);
 
   document.getElementById('statReservations').textContent = filtered.length;
@@ -270,8 +351,7 @@ function renderReviewStats() {
 
 /* ── Graphique revenus par soin ──────────────────────────── */
 
-function updateServicesChart() {
-  const filtered  = filterByPeriod(allReservations, currentPeriod);
+function updateServicesChart(filtered) {
   const container = document.getElementById('servicesChart');
 
   if (filtered.length === 0) {
@@ -291,8 +371,12 @@ function updateServicesChart() {
 
   const entries = Object.entries(map).sort((a, b) => b[1].revenue - a[1].revenue);
   const maxRev  = Math.max(...entries.map(e => e[1].revenue), 1);
+  const { totalRevenue, totalCount } = entries.reduce(
+    (acc, [, s]) => ({ totalRevenue: acc.totalRevenue + s.revenue, totalCount: acc.totalCount + s.count }),
+    { totalRevenue: 0, totalCount: 0 }
+  );
 
-  container.innerHTML = entries.map(([name, s]) => {
+  const rows = entries.map(([name, s]) => {
     const pct = ((s.revenue / maxRev) * 100).toFixed(1);
     return `
       <div class="service-bar-row">
@@ -306,6 +390,15 @@ function updateServicesChart() {
         </div>
       </div>`;
   }).join('');
+
+  const totalRow = `
+    <div class="service-bar-total">
+      <span class="service-bar-total-label">Total</span>
+      <span class="service-bar-total-count">${totalCount} réservation${totalCount > 1 ? 's' : ''}</span>
+      <span class="service-bar-total-amount">${formatCFA(totalRevenue)}</span>
+    </div>`;
+
+  container.innerHTML = rows + totalRow;
 }
 
 /* ── Tableau des réservations ────────────────────────────── */
@@ -353,11 +446,19 @@ function renderReservations() {
         <td class="soin-cell" title="${esc(r.soin || '')}">${esc(r.soin || '—')}</td>
         <td><a href="tel:${phone}">${phone}</a></td>
         <td>${esc(r.adresse || '—')}</td>
-        <td>
+        <td class="td-actions">
           <button class="btn-detail" data-action="show-detail" data-id="${id}" title="Voir les détails">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
               <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+          <button class="btn-detail btn-detail--danger" data-action="delete-reservation" data-id="${id}" data-label="${esc((r.prenom || '') + ' ' + (r.nom || ''))}" title="Supprimer la réservation" aria-label="Supprimer la réservation de ${esc(r.prenom || '')}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6l-1 14H6L5 6"/>
+              <path d="M10 11v6"/><path d="M14 11v6"/>
+              <path d="M9 6V4h6v2"/>
             </svg>
           </button>
         </td>
@@ -373,14 +474,17 @@ function formatDateShort(isoDate) {
 
 /* ── Liste des avis ──────────────────────────────────────── */
 
-function renderReviews() {
+function getSortedReviews() {
   const sort   = document.getElementById('reviewsSort').value;
-  let sorted   = [...allReviews];
-
+  const sorted = [...allReviews];
   if (sort === 'best')  sorted.sort((a, b) => b.note - a.note);
   if (sort === 'worst') sorted.sort((a, b) => a.note - b.note);
+  return sorted;
+}
 
-  const start = (reviewsPage - 1) * REVIEWS_PER_PAGE;
+function renderReviews() {
+  const sorted = getSortedReviews();
+  const start  = (reviewsPage - 1) * REVIEWS_PER_PAGE;
   const page  = sorted.slice(start, start + REVIEWS_PER_PAGE);
 
   const container = document.getElementById('reviewsList');
@@ -450,17 +554,31 @@ function renderPagination(total) {
 
 /* ── Modal : suppression d'un avis ──────────────────────── */
 
-function openDeleteModal(id, prenom) {
-  pendingDeleteId = id;
-  document.getElementById('deleteModalText').textContent =
-    `Supprimer l'avis de "${prenom}" ? Cette action est irréversible.`;
+const DELETE_CONFIG = {
+  reservation: {
+    title: 'Supprimer la réservation ?',
+    text:  label => `Supprimer la réservation de "${label}" ? Cette action est irréversible.`
+  },
+  review: {
+    title: "Supprimer l'avis ?",
+    text:  label => `Supprimer l'avis de "${label}" ? Cette action est irréversible.`
+  }
+};
+
+function openDeleteModal(id, label, type = 'review') {
+  pendingDeleteId   = id;
+  pendingDeleteType = type;
+  const cfg = DELETE_CONFIG[type];
+  document.getElementById('deleteModalTitle').textContent = cfg.title;
+  document.getElementById('deleteModalText').textContent  = cfg.text(label);
   document.getElementById('deleteModal').hidden = false;
   document.getElementById('deleteCancelBtn').focus();
 }
 
 function closeDeleteModal() {
   document.getElementById('deleteModal').hidden = true;
-  pendingDeleteId = null;
+  pendingDeleteId   = null;
+  pendingDeleteType = null;
 }
 
 async function confirmDelete() {
@@ -470,15 +588,20 @@ async function confirmDelete() {
   btn.disabled    = true;
   btn.textContent = 'Suppression…';
 
+  const table   = pendingDeleteType === 'reservation' ? 'reservations' : 'reviews';
   const idValue = isNaN(pendingDeleteId) ? pendingDeleteId : Number(pendingDeleteId);
-  const { error } = await sb.from('reviews').delete().eq('id', idValue);
+  const { error } = await sb.from(table).delete().eq('id', idValue);
 
   if (error) {
     alert(
       'Erreur lors de la suppression.\n\n' +
-      'Si le problème persiste, allez dans Supabase > Table Editor > reviews > RLS,\n' +
+      'Si le problème persiste, allez dans Supabase > Table Editor > ' + table + ' > RLS,\n' +
       'et ajoutez une policy DELETE pour les utilisateurs authentifiés.'
     );
+  } else if (pendingDeleteType === 'reservation') {
+    allReservations = allReservations.filter(r => String(r.id) !== String(pendingDeleteId));
+    refreshPeriodViews();
+    renderReservations();
   } else {
     allReviews = allReviews.filter(r => String(r.id) !== String(pendingDeleteId));
     renderReviewStats();

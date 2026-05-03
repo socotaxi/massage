@@ -53,6 +53,15 @@
         </div>
       </div>
       <div class="admin-header-actions">
+        <button id="exportBtn" class="btn-export" title="Exporter en PDF">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="12" y1="18" x2="12" y2="12"/>
+            <line x1="9" y1="15" x2="15" y2="15"/>
+          </svg>
+          Exporter PDF
+        </button>
         <a href="index.html" class="btn-site" title="Voir le site public" target="_blank">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="10"/>
@@ -80,6 +89,21 @@
       </div>
     </header>
 
+    <!-- En-tête visible uniquement à l'impression -->
+    <div id="printHeader" class="print-header" hidden>
+      <div class="print-header__brand">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <circle cx="18" cy="18" r="18" fill="#7A9E7E"/>
+          <path d="M18 9c-2 0-3.5 1.6-3.5 3.5S16 16 18 16s3.5-1.6 3.5-3.5S20 9 18 9zm0 9.5c-4.6 0-7 2.4-7 3.5V24h14v-2c0-1.1-2.4-3.5-7-3.5z" fill="white"/>
+        </svg>
+        <div>
+          <strong>Maison Anaya</strong>
+          <span>Rapport d'activité</span>
+        </div>
+      </div>
+      <p id="printDate" class="print-header__date"></p>
+    </div>
+
     <main class="admin-main">
 
       <!-- ── Aperçu statistiques ── -->
@@ -87,10 +111,10 @@
         <div class="section-head">
           <h2 class="section-title">Aperçu</h2>
           <div class="period-tabs" role="group" aria-label="Période">
-            <button class="period-tab active" data-period="day">Aujourd'hui</button>
+            <button class="period-tab" data-period="day">Aujourd'hui</button>
             <button class="period-tab" data-period="week">Semaine</button>
             <button class="period-tab" data-period="month">Mois</button>
-            <button class="period-tab" data-period="all">Total</button>
+            <button class="period-tab active" data-period="all">Total</button>
           </div>
         </div>
         <div class="stats-grid">
@@ -171,9 +195,9 @@
             <span class="badge" id="reservationsBadge">0</span>
           </h2>
           <select id="reservationsFilter" class="select-sm">
+            <option value="all">Toutes</option>
             <option value="upcoming">À venir (7 jours)</option>
             <option value="today">Aujourd'hui</option>
-            <option value="all">Toutes</option>
             <option value="past">Passées</option>
           </select>
         </div>
@@ -239,7 +263,7 @@
   <div id="deleteModal" class="modal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
     <div class="modal-box modal-box--sm">
       <div class="modal-header">
-        <h3 id="deleteModalTitle">Supprimer l'avis ?</h3>
+        <h3 id="deleteModalTitle">Confirmer la suppression</h3>
       </div>
       <p id="deleteModalText" class="modal-text"></p>
       <div class="modal-actions">
