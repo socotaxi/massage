@@ -20,6 +20,7 @@
   --gray-light:  #F0EDE8;
   --white:       #FFFFFF;
   --border:      rgba(0,0,0,.08);
+  --sage-text:   #3D6841;
 
   --font-serif:  'Cormorant Garamond', Georgia, serif;
   --font-sans:   'Inter', system-ui, sans-serif;
@@ -114,7 +115,7 @@ img { display: block; max-width: 100%; }
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--sage);
+  color: var(--sage-text);
   margin-bottom: 12px;
 }
 .section__title { color: var(--dark); margin-bottom: 16px; }
@@ -178,11 +179,12 @@ img { display: block; max-width: 100%; }
 .nav a {
   font-size: .9rem;
   font-weight: 500;
-  color: var(--dark);
-  opacity: .7;
-  transition: opacity .2s;
+  color: var(--white);
+  opacity: .85;
+  transition: opacity .2s, color .3s;
 }
 .nav a:hover { opacity: 1; }
+.header.scrolled .nav a { color: var(--dark); }
 
 .header__cta { display: none; margin-left: 12px; }
 @media (min-width: 768px) { .header__cta { display: inline-flex; } }
@@ -1120,7 +1122,7 @@ img { display: block; max-width: 100%; }
 }
 .info-card__icon { margin-bottom: 12px; }
 .info-card__icon svg { width: 28px; height: 28px; stroke: var(--sage); }
-.info-card h4 { font-size: 1rem; color: var(--dark); margin-bottom: 4px; }
+.info-card h4, .info-card__title { font-size: 1rem; color: var(--dark); margin-bottom: 4px; }
 .info-card p { font-size: .88rem; }
 
 /* ============================================================
@@ -1156,7 +1158,7 @@ img { display: block; max-width: 100%; }
 .footer__socials svg { width: 16px; height: 16px; fill: rgba(255,255,255,.7); }
 .footer__socials a:hover svg { fill: var(--white); }
 
-.footer__col h5 {
+.footer__col h5, .footer__col-title {
   font-family: var(--font-sans);
   font-size: .8rem;
   font-weight: 700;

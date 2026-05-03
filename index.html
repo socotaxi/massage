@@ -43,7 +43,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" /></noscript>
+  <link rel="preload" as="image" href="images/astrid.jpeg" />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="images/favicon.png" />
@@ -93,6 +96,7 @@
     </a>
   </nav>
 
+  <main id="main-content">
   <!-- ===== HERO ===== -->
   <section class="hero" id="home">
     <div class="hero__bg">
@@ -110,7 +114,7 @@
         </div>
         <div class="hero__portrait">
           <a href="#about">
-            <img src="images/astrid.jpeg" alt="Astrid — Maison Anaya" />
+            <img src="images/astrid.jpeg" alt="Astrid — Maison Anaya" width="320" height="400" fetchpriority="high" />
           </a>
         </div>
       </div>
@@ -308,7 +312,7 @@
     <div class="container about__inner">
       <div class="about__img">
         <div class="about__img-wrap">
-          <img src="images/astrid.jpeg" alt="Astrid — Maison Anaya" class="about__photo" loading="lazy" />
+          <img src="images/astrid.jpeg" alt="Astrid — Maison Anaya" class="about__photo" width="480" height="600" loading="lazy" />
           <div class="about__badge">
             <strong>4 ans</strong>
             <span>d'expérience</span>
@@ -515,34 +519,36 @@
             <div class="info-card__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
             </div>
-            <h4>Zone desservie</h4>
+            <h3 class="info-card__title">Zone desservie</h3>
             <p>Centre-ville, Mpita, Loandjili, Ngoyo, Tchikobo, Warf et bien d'autres quartiers de Pointe-Noire.</p>
           </div>
           <div class="info-card">
             <div class="info-card__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
             </div>
-            <h4>Disponibilités</h4>
+            <h3 class="info-card__title">Disponibilités</h3>
             <p>Tous les jours de 9h à 21h, lundi au dimanche. Réservation 24h à l'avance.</p>
           </div>
           <div class="info-card">
             <div class="info-card__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
             </div>
-            <h4>Paiement</h4>
+            <h3 class="info-card__title">Paiement</h3>
             <p>Prépaiement en ligne sécurisé lors de la réservation.</p>
           </div>
           <div class="info-card">
             <div class="info-card__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M3 16l3 3a9 9 0 0 0 15-6"/><path d="M21 4v4h-4"/><path d="M3 20v-4h4"/></svg>
             </div>
-            <h4>Annulation</h4>
+            <h3 class="info-card__title">Annulation</h3>
             <p>Remboursable si annulation plus de 24h avant. Un report possible sur demande.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer" id="contact">
@@ -562,7 +568,7 @@
         </div>
       </div>
       <div class="footer__col">
-        <h5>Soins</h5>
+        <h3 class="footer__col-title">Soins</h3>
         <ul>
           <li><a href="#services">Massage Relaxant</a></li>
           <li><a href="#services">Massage Tensions Profondes</a></li>
@@ -573,7 +579,7 @@
         </ul>
       </div>
       <div class="footer__col">
-        <h5>Informations</h5>
+        <h3 class="footer__col-title">Informations</h3>
         <ul>
           <li><a href="#about">À propos d'Astrid</a></li>
           <li><a href="#avis">Avis clients</a></li>
@@ -582,7 +588,7 @@
         </ul>
       </div>
       <div class="footer__col">
-        <h5>Contact</h5>
+        <h3 class="footer__col-title">Contact</h3>
         <ul>
           <li><a href="tel:+242055716062">+242 05 571 60 62</a></li>
           <li><a href="mailto:contact@maisonanaya.com">contact@maisonanaya.com</a></li>
@@ -606,7 +612,7 @@
     <div class="confirm-modal__card">
       <button class="confirm-modal__close" id="confirmModalClose" aria-label="Fermer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       <div class="confirm-modal__top">
-        <img src="images/astrid.jpeg" alt="Astrid" class="confirm-modal__photo" />
+        <img src="images/astrid.jpeg" alt="Astrid" class="confirm-modal__photo" width="80" height="80" loading="lazy" />
         <div class="confirm-modal__check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
       </div>
       <h3 class="confirm-modal__title">Réservation confirmée</h3>
