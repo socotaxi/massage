@@ -9,26 +9,6 @@ window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-/* ---- Mobile bottom nav — active state on scroll ---- */
-const sections = document.querySelectorAll('section[id], div[id]');
-const mobileNavItems = document.querySelectorAll('.mobile-nav__item');
-
-const observerNav = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const id = entry.target.getAttribute('id');
-      mobileNavItems.forEach(item => {
-        item.classList.remove('active');
-        if (item.getAttribute('href') === `#${id}`) {
-          item.classList.add('active');
-        }
-      });
-    }
-  });
-}, { threshold: 0.4 });
-
-sections.forEach(s => observerNav.observe(s));
-
 /* ---- Smooth scroll for all anchor links ---- */
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
@@ -41,28 +21,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
-/* ---- Scroll animations ---- */
-const animElements = document.querySelectorAll(
-  '.service-card, .step, .review-card, .faq__item, .info-card, .about__content, .about__img, .hero__trust'
-);
-
-animElements.forEach((el, i) => {
-  el.setAttribute('data-animate', '');
-  if (i % 3 === 1) el.setAttribute('data-animate-delay', '1');
-  if (i % 3 === 2) el.setAttribute('data-animate-delay', '2');
-});
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-animElements.forEach(el => observer.observe(el));
-
 /* ---- Set min date for reservation (24h minimum) ---- */
 const dateInput = document.getElementById('date');
 if (dateInput) {
@@ -71,109 +29,15 @@ if (dateInput) {
   dateInput.setAttribute('min', tomorrow.toISOString().split('T')[0]);
 }
 
-/* ---- Booking form with Supabase ---- */
-const bookingForm = document.getElementById('bookingForm');
-const heureSelect = document.getElementById('heure');
-
-const ALL_SLOTS = ['09h00','10h00','11h00','12h00','13h00','14h00','15h00','16h00','17h00','18h00','19h00','20h00','21h00'];
-
-async function updateAvailableSlots(date) {
-  if (!heureSelect || !date) return;
-  heureSelect.innerHTML = '<option value="">Choisir un créneau</option>';
-  ALL_SLOTS.forEach(slot => {
-    const opt = document.createElement('option');
-    opt.value = slot;
-    opt.textContent = slot;
-    heureSelect.appendChild(opt);
-  });
-  const { data, error } = await sb.rpc('get_booked_slots', { date_param: date });
-  if (error) { console.error(error); return; }
-  const booked = data.map(r => r.heure);
-  heureSelect.querySelectorAll('option[value]').forEach(opt => {
-    if (booked.includes(opt.value)) {
-      opt.disabled = true;
-      opt.textContent = opt.value + ' — Indisponible';
-    }
-  });
-}
-
-if (dateInput) {
-  dateInput.addEventListener('change', () => updateAvailableSlots(dateInput.value));
-}
-
-if (bookingForm) {
-  bookingForm.addEventListener('submit', async e => {
-    e.preventDefault();
-    const btn = bookingForm.querySelector('[type="submit"]');
-    const original = btn.innerHTML;
-
-    const soin    = document.getElementById('soin').value;
-    const date    = dateInput ? dateInput.value : '';
-    const heure   = heureSelect ? heureSelect.value : '';
-    const prenom  = document.getElementById('prenom').value.trim();
-    const nom     = document.getElementById('nom').value.trim();
-    const email   = document.getElementById('email').value.trim();
-    const tel     = document.getElementById('tel').value.trim();
-    const adresse = document.getElementById('adresse').value.trim();
-    const message = document.getElementById('message').value.trim() || null;
-
-    // Validation explicite (les navigateurs mobiles n'appliquent pas toujours required)
-    if (!prenom || !nom || !email || !tel || !adresse || !soin || !date || !heure) {
-      btn.innerHTML = '⚠ Veuillez remplir tous les champs';
-      btn.style.background = '#C0392B';
-      setTimeout(() => { btn.innerHTML = original; btn.style.background = ''; }, 3000);
-      return;
-    }
-
-    btn.innerHTML = 'Envoi en cours…';
-    btn.disabled = true;
-
-    const duree = soin.includes('90 min') ? 90 : soin.includes('30 min') ? 30 : 60;
-
-    try {
-      const { error } = await sb.from('reservations').insert([{
-        prenom, nom, email, tel, adresse, soin, duree, date, heure, message,
-      }]);
-
-      if (error) {
-        console.error('Supabase error:', error);
-        if (error.code === '23505') {
-          btn.innerHTML = '⚠ Ce créneau vient d\'être pris — choisissez une autre heure';
-          updateAvailableSlots(date);
-        } else {
-          btn.innerHTML = '⚠ Erreur, réessayez';
-        }
-        btn.style.background = '#C0392B';
-        setTimeout(() => { btn.innerHTML = original; btn.style.background = ''; btn.disabled = false; }, 4000);
-        return;
-      }
-
-      showConfirmModal({ prenom, nom, soin, date, heure, adresse });
-      btn.innerHTML = original;
-      btn.style.background = '';
-      btn.disabled = false;
-      bookingForm.reset();
-      if (date) {
-        await updateAvailableSlots(date);
-      } else {
-        heureSelect.innerHTML = '<option value="">Choisir un créneau</option>';
-        ALL_SLOTS.forEach(slot => {
-          const opt = document.createElement('option');
-          opt.value = slot;
-          opt.textContent = slot;
-          heureSelect.appendChild(opt);
-        });
-      }
-    } catch (err) {
-      console.error('Submit error:', err);
-      btn.innerHTML = '⚠ Erreur réseau, réessayez';
-      btn.style.background = '#C0392B';
-      setTimeout(() => { btn.innerHTML = original; btn.style.background = ''; btn.disabled = false; }, 4000);
-    }
-  });
-}
-
 /* ---- Modal confirmation ---- */
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 function formatDateFr(isoDate) {
   return new Date(isoDate + 'T12:00:00').toLocaleDateString('fr-FR', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
@@ -234,20 +98,134 @@ if (burger && nav) {
   });
 }
 
-/* ---- Avis clients — Supabase ---- */
-const sb = window.supabase.createClient(
-  'https://goqetlemaqvcdhjqrygx.supabase.co',
-  'sb_publishable_e8D5ARaw7MAILFZGNXYwBg_UjoWBrOK'
-);
+/* ---- Supabase — chargement différé ---- */
+const SUPABASE_URL = 'https://goqetlemaqvcdhjqrygx.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_e8D5ARaw7MAILFZGNXYwBg_UjoWBrOK';
+let sb = null;
 
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+function initSupabase() {
+  if (sb) return Promise.resolve(sb);
+  return new Promise((resolve, reject) => {
+    if (window.supabase) {
+      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      return resolve(sb);
+    }
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.1/dist/umd/supabase.js';
+    s.onload = () => {
+      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      resolve(sb);
+    };
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
 }
 
+/* ---- Booking form ---- */
+const bookingForm = document.getElementById('bookingForm');
+const heureSelect = document.getElementById('heure');
+
+const ALL_SLOTS = ['09h00','10h00','11h00','12h00','13h00','14h00','15h00','16h00','17h00','18h00','19h00','20h00','21h00'];
+
+async function updateAvailableSlots(date) {
+  if (!heureSelect || !date) return;
+  heureSelect.innerHTML = '<option value="">Choisir un créneau</option>';
+  ALL_SLOTS.forEach(slot => {
+    const opt = document.createElement('option');
+    opt.value = slot;
+    opt.textContent = slot;
+    heureSelect.appendChild(opt);
+  });
+  const client = await initSupabase();
+  const { data, error } = await client.rpc('get_booked_slots', { date_param: date });
+  if (error) { console.error(error); return; }
+  const booked = data.map(r => r.heure);
+  heureSelect.querySelectorAll('option[value]').forEach(opt => {
+    if (booked.includes(opt.value)) {
+      opt.disabled = true;
+      opt.textContent = opt.value + ' — Indisponible';
+    }
+  });
+}
+
+if (dateInput) {
+  dateInput.addEventListener('change', () => updateAvailableSlots(dateInput.value));
+}
+
+if (bookingForm) {
+  bookingForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = bookingForm.querySelector('[type="submit"]');
+    const original = btn.innerHTML;
+
+    const soin    = document.getElementById('soin').value;
+    const date    = dateInput ? dateInput.value : '';
+    const heure   = heureSelect ? heureSelect.value : '';
+    const prenom  = document.getElementById('prenom').value.trim();
+    const nom     = document.getElementById('nom').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const tel     = document.getElementById('tel').value.trim();
+    const adresse = document.getElementById('adresse').value.trim();
+    const message = document.getElementById('message').value.trim() || null;
+
+    // Validation explicite (les navigateurs mobiles n'appliquent pas toujours required)
+    if (!prenom || !nom || !email || !tel || !adresse || !soin || !date || !heure) {
+      btn.innerHTML = '⚠ Veuillez remplir tous les champs';
+      btn.style.background = '#C0392B';
+      setTimeout(() => { btn.innerHTML = original; btn.style.background = ''; }, 3000);
+      return;
+    }
+
+    btn.innerHTML = 'Envoi en cours…';
+    btn.disabled = true;
+
+    const duree = soin.includes('90 min') ? 90 : soin.includes('30 min') ? 30 : 60;
+
+    try {
+      const client = await initSupabase();
+      const { error } = await client.from('reservations').insert([{
+        prenom, nom, email, tel, adresse, soin, duree, date, heure, message,
+      }]);
+
+      if (error) {
+        console.error('Supabase error:', error);
+        if (error.code === '23505') {
+          btn.innerHTML = '⚠ Ce créneau vient d\'être pris — choisissez une autre heure';
+          updateAvailableSlots(date);
+        } else {
+          btn.innerHTML = '⚠ Erreur, réessayez';
+        }
+        btn.style.background = '#C0392B';
+        setTimeout(() => { btn.innerHTML = original; btn.style.background = ''; btn.disabled = false; }, 4000);
+        return;
+      }
+
+      showConfirmModal({ prenom, nom, soin, date, heure, adresse });
+      btn.innerHTML = original;
+      btn.style.background = '';
+      btn.disabled = false;
+      bookingForm.reset();
+      if (date) {
+        await updateAvailableSlots(date);
+      } else {
+        heureSelect.innerHTML = '<option value="">Choisir un créneau</option>';
+        ALL_SLOTS.forEach(slot => {
+          const opt = document.createElement('option');
+          opt.value = slot;
+          opt.textContent = slot;
+          heureSelect.appendChild(opt);
+        });
+      }
+    } catch (err) {
+      console.error('Submit error:', err);
+      btn.innerHTML = '⚠ Erreur réseau, réessayez';
+      btn.style.background = '#C0392B';
+      setTimeout(() => { btn.innerHTML = original; btn.style.background = ''; btn.disabled = false; }, 4000);
+    }
+  });
+}
+
+/* ---- Avis clients ---- */
 function relativeDate(isoStr) {
   const days = Math.floor((Date.now() - new Date(isoStr).getTime()) / 86400000);
   if (days === 0) return "aujourd'hui";
@@ -290,6 +268,11 @@ function buildReviewCard(rv) {
     </div>`;
 }
 
+const reviewsGrid = document.getElementById('reviewsGrid');
+const REVIEWS_PER_PAGE = 3;
+let allReviews = [];
+let currentPage = 1;
+
 function appendReviewCard(rv, grid) {
   const temp = document.createElement('div');
   temp.innerHTML = buildReviewCard(rv);
@@ -299,11 +282,6 @@ function appendReviewCard(rv, grid) {
   requestAnimationFrame(() => card.classList.add('is-visible'));
   return card;
 }
-
-const reviewsGrid = document.getElementById('reviewsGrid');
-const REVIEWS_PER_PAGE = 3;
-let allReviews = [];
-let currentPage = 1;
 
 function renderPage(page) {
   reviewsGrid.innerHTML = '';
@@ -328,7 +306,8 @@ function renderPage(page) {
 
 async function loadReviews() {
   if (!reviewsGrid) return;
-  const { data, error } = await sb
+  const client = await initSupabase();
+  const { data, error } = await client
     .from('reviews')
     .select('*')
     .order('created_at', { ascending: false });
@@ -338,7 +317,17 @@ async function loadReviews() {
   updateReviewStats(data);
 }
 
-loadReviews();
+/* Charge les avis uniquement quand la section devient visible */
+const reviewsSection = document.getElementById('avis');
+if (reviewsSection && reviewsGrid) {
+  const reviewsVisibilityObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      loadReviews();
+      reviewsVisibilityObserver.disconnect();
+    }
+  }, { rootMargin: '400px' });
+  reviewsVisibilityObserver.observe(reviewsSection);
+}
 
 document.getElementById('paginationPrev')?.addEventListener('click', () => {
   if (currentPage > 1) { currentPage--; renderPage(currentPage); }
@@ -411,7 +400,8 @@ if (reviewForm) {
     submitBtn.innerHTML = 'Envoi en cours…';
     submitBtn.disabled  = true;
 
-    const { data, error } = await sb
+    const client = await initSupabase();
+    const { data, error } = await client
       .from('reviews')
       .insert([{
         prenom,
@@ -456,3 +446,49 @@ if (reviewForm) {
     }, 2000);
   });
 }
+
+/* ---- Scroll animations + mobile nav — différés hors chemin critique ---- */
+const rIC = window.requestIdleCallback || (cb => setTimeout(cb, 100));
+rIC(() => {
+  /* Mobile bottom nav — active state on scroll */
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const mobileNavItems = document.querySelectorAll('.mobile-nav__item');
+
+  const observerNav = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        mobileNavItems.forEach(item => {
+          item.classList.remove('active');
+          if (item.getAttribute('href') === `#${id}`) {
+            item.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => observerNav.observe(s));
+
+  /* Scroll animations */
+  const animElements = document.querySelectorAll(
+    '.service-card, .step, .review-card, .faq__item, .info-card, .about__content, .about__img, .hero__trust'
+  );
+
+  animElements.forEach((el, i) => {
+    el.setAttribute('data-animate', '');
+    if (i % 3 === 1) el.setAttribute('data-animate-delay', '1');
+    if (i % 3 === 2) el.setAttribute('data-animate-delay', '2');
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  animElements.forEach(el => observer.observe(el));
+});

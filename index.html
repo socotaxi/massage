@@ -46,7 +46,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" /></noscript>
-  <link rel="preload" as="image" href="images/astrid.webp" />
+  <link rel="preload" as="image" href="images/astrid.webp" fetchpriority="high" />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
@@ -60,7 +60,7 @@
   <header class="header" id="header">
     <div class="container header__inner">
       <a href="#" class="logo">
-        <img src="images/logo.webp" alt="Maison Anaya" class="logo__img" />
+        <img src="images/logo.webp" alt="Maison Anaya" class="logo__img" width="292" height="166" />
       </a>
 
       <!-- Soins + Avis groupés à droite (mobile) -->
@@ -606,7 +606,6 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <!-- ===== MODAL CONFIRMATION ===== -->
   <div id="confirmModal" class="confirm-modal" hidden aria-modal="true" role="dialog">
     <div class="confirm-modal__overlay" id="confirmModalOverlay"></div>
