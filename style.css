@@ -668,12 +668,12 @@ img { display: block; max-width: 100%; }
   background-position: center;
 }
 /* Gradient placeholders for images */
-.service-card__img--relaxant  { background: url('images/pic_massage_relaxant.png') center/cover no-repeat; }
-.service-card__img--sportif   { background: url('images/pic_massage_tensions.png') center/cover no-repeat; }
-.service-card__img--prenatal  { background: url('images/pic_massage_muscle.png') center/cover no-repeat; }
-.service-card__img--piedsmains{ background: url('images/pic_massage_pieds.png') center/cover no-repeat; }
-.service-card__img--pierre    { background: url('images/pic_massage_bougie.png') center/cover no-repeat; }
-.service-card__img--duo       { background: url('images/pic_massage_nuque.png') center/cover no-repeat; }
+.service-card__img--relaxant  { background: url('images/pic_massage_relaxant.webp') center/cover no-repeat; }
+.service-card__img--sportif   { background: url('images/pic_massage_tensions.webp') center/cover no-repeat; }
+.service-card__img--prenatal  { background: url('images/pic_massage_muscle.webp') center/cover no-repeat; }
+.service-card__img--piedsmains{ background: url('images/pic_massage_pieds.webp') center/cover no-repeat; }
+.service-card__img--pierre    { background: url('images/pic_massage_bougie.webp') center/cover no-repeat; }
+.service-card__img--duo       { background: url('images/pic_massage_nuque.webp') center/cover no-repeat; }
 
 
 .service-card__badge {
