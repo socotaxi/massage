@@ -106,59 +106,69 @@ if (bookingForm) {
     e.preventDefault();
     const btn = bookingForm.querySelector('[type="submit"]');
     const original = btn.innerHTML;
-    btn.innerHTML = 'Envoi en cours…';
-    btn.disabled = true;
 
-    const soin = document.getElementById('soin').value;
-    const duree = soin.includes('90 min') ? 90 : soin.includes('30 min') ? 30 : 60;
+    const soin    = document.getElementById('soin').value;
+    const date    = dateInput ? dateInput.value : '';
+    const heure   = heureSelect ? heureSelect.value : '';
+    const prenom  = document.getElementById('prenom').value.trim();
+    const nom     = document.getElementById('nom').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const tel     = document.getElementById('tel').value.trim();
+    const adresse = document.getElementById('adresse').value.trim();
+    const message = document.getElementById('message').value.trim() || null;
 
-    const { error } = await sb.from('reservations').insert([{
-      prenom:  document.getElementById('prenom').value.trim(),
-      nom:     document.getElementById('nom').value.trim(),
-      email:   document.getElementById('email').value.trim(),
-      tel:     document.getElementById('tel').value.trim(),
-      adresse: document.getElementById('adresse').value.trim(),
-      soin,
-      duree,
-      date:    dateInput.value,
-      heure:   heureSelect.value,
-      message: document.getElementById('message').value.trim() || null,
-    }]);
-
-    if (error) {
-      if (error.code === '23505') {
-        btn.innerHTML = '⚠ Ce créneau vient d\'être pris — choisissez une autre heure';
-        updateAvailableSlots(dateInput.value);
-      } else {
-        btn.innerHTML = '⚠ Erreur, réessayez';
-      }
+    // Validation explicite (les navigateurs mobiles n'appliquent pas toujours required)
+    if (!prenom || !nom || !email || !tel || !adresse || !soin || !date || !heure) {
+      btn.innerHTML = '⚠ Veuillez remplir tous les champs';
       btn.style.background = '#C0392B';
-      setTimeout(() => { btn.innerHTML = original; btn.style.background = ''; btn.disabled = false; }, 4000);
+      setTimeout(() => { btn.innerHTML = original; btn.style.background = ''; }, 3000);
       return;
     }
 
-    showConfirmModal({
-      prenom:  document.getElementById('prenom').value.trim(),
-      nom:     document.getElementById('nom').value.trim(),
-      soin,
-      date:    dateInput.value,
-      heure:   heureSelect.value,
-      adresse: document.getElementById('adresse').value.trim(),
-    });
-    btn.innerHTML = original;
-    btn.style.background = '';
-    btn.disabled = false;
-    bookingForm.reset();
-    if (dateInput.value) {
-      await updateAvailableSlots(dateInput.value);
-    } else {
-      heureSelect.innerHTML = '<option value="">Choisir un créneau</option>';
-      ALL_SLOTS.forEach(slot => {
-        const opt = document.createElement('option');
-        opt.value = slot;
-        opt.textContent = slot;
-        heureSelect.appendChild(opt);
-      });
+    btn.innerHTML = 'Envoi en cours…';
+    btn.disabled = true;
+
+    const duree = soin.includes('90 min') ? 90 : soin.includes('30 min') ? 30 : 60;
+
+    try {
+      const { error } = await sb.from('reservations').insert([{
+        prenom, nom, email, tel, adresse, soin, duree, date, heure, message,
+      }]);
+
+      if (error) {
+        console.error('Supabase error:', error);
+        if (error.code === '23505') {
+          btn.innerHTML = '⚠ Ce créneau vient d\'être pris — choisissez une autre heure';
+          updateAvailableSlots(date);
+        } else {
+          btn.innerHTML = '⚠ Erreur, réessayez';
+        }
+        btn.style.background = '#C0392B';
+        setTimeout(() => { btn.innerHTML = original; btn.style.background = ''; btn.disabled = false; }, 4000);
+        return;
+      }
+
+      showConfirmModal({ prenom, nom, soin, date, heure, adresse });
+      btn.innerHTML = original;
+      btn.style.background = '';
+      btn.disabled = false;
+      bookingForm.reset();
+      if (date) {
+        await updateAvailableSlots(date);
+      } else {
+        heureSelect.innerHTML = '<option value="">Choisir un créneau</option>';
+        ALL_SLOTS.forEach(slot => {
+          const opt = document.createElement('option');
+          opt.value = slot;
+          opt.textContent = slot;
+          heureSelect.appendChild(opt);
+        });
+      }
+    } catch (err) {
+      console.error('Submit error:', err);
+      btn.innerHTML = '⚠ Erreur réseau, réessayez';
+      btn.style.background = '#C0392B';
+      setTimeout(() => { btn.innerHTML = original; btn.style.background = ''; btn.disabled = false; }, 4000);
     }
   });
 }

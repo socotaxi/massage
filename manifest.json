@@ -1,0 +1,21 @@
+{
+  "name": "Maison Anaya",
+  "short_name": "Maison Anaya",
+  "description": "Massage professionnel à domicile à Pointe-Noire",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F5F0E8",
+  "theme_color": "#1C1C1C",
+  "icons": [
+    {
+      "src": "images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}
